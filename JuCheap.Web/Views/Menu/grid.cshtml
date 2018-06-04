@@ -1,0 +1,183 @@
+﻿
+@{
+    ViewBag.Title = "菜单首页";
+    Layout = "~/Views/Shared/_Layout_Content.cshtml";
+}
+@section styles
+{
+    <link href="/Content/css/plugins/jqgrid/ui.jqgrid.css" rel="stylesheet" />
+}
+
+<div class="wrapper wrapper-content">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>菜单管理</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="form-group">
+                <button id="btnAdd" type="button" class="btn btn-primary " onclick="addModel()"><i class="fa fa-check"></i>&nbsp;添加</button>
+                <button id="btnEdit" type="button" class="btn btn-info " onclick="editModel()"><i class="fa fa-paste"></i> 编辑</button>
+                <button id="btnDel" type="button" class="btn btn-danger " onclick="delData()">
+                    <i class="fa fa-dedent"></i>&nbsp;&nbsp;<span class="bold">删除</span>
+                </button>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group">
+                    <input id="txtSearchKey" type="text" class="input form-control" placeholder="搜索关键字" />
+                    <span class="input-group-btn">
+                        <button id="btnSearch" class="btn btn btn-primary" type="button"> <i class="fa fa-search"></i> 搜索</button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="jqGrid_wrapper">
+                <table id="table_list"></table>
+                <div id="pager_list"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/content/js/list")
+    <script src="~/Content/js/jqgrid.treegrid.js"></script>
+    <script>
+        function addModel() {
+            $("#btnAdd").button("loading");
+            window.location.href = "@Url.Action("Add")";
+        }
+
+        function editModel() {//编辑
+            var row = JucheapGrid.GetData();
+            if (row != null) {
+                $("#btnEdit").button("loading");
+                window.location.href = "@Url.Action("Edit")/" + row.Id;
+            } else {
+                parent.layer.alert("请选择要编辑的数据");
+            }
+        }
+
+        function delData() {//删除
+            XPage.DelData("@Url.Action("Delete")");
+        }
+
+        function searchData() {//搜索
+            var json = {
+                keywords: $("#txtSearchKey").val()
+            };
+            XPage.Search(json);
+        }
+        jQuery(document).ready(function($) {
+            jQuery('#table_list').jqGrid({
+                "url": "/Menu/IndexGrid",
+                "colModel": [
+					{
+					    "name": "category_id",
+					    "index": "accounts.account_id",
+					    "sorttype": "int",
+					    "key": true,
+					    "hidden": true,
+					    "width": 50
+					}, {
+					    "name": "name",
+					    "index": "name",
+					    "sorttype": "string",
+					    "label": "Name",
+					    "width": 170
+					}, {
+					    "name": "price",
+					    "index": "price",
+					    "sorttype": "numeric",
+					    "label": "Price",
+					    "width": 90,
+					    "align": "right"
+					}, {
+					    "name": "qty_onhand",
+					    "index": "qty_onhand",
+					    "sorttype": "int",
+					    "label": "Qty",
+					    "width": 90,
+					    "align": "right"
+					}, {
+					    "name": "color",
+					    "index": "color",
+					    "sorttype": "string",
+					    "label": "Color",
+					    "width": 100
+					}, {
+					    "name": "lft",
+					    "hidden": true
+					}, {
+					    "name": "rgt",
+					    "hidden": true
+					}, {
+					    "name": "level",
+					    "hidden": true
+					}, {
+					    "name": "uiicon",
+					    "hidden": true
+					}
+                ],
+                "beforeRequest": function () {
+                    if (this.p.postData.nodeid != null) {
+                        var nid = parseInt(this.p.postData.nodeid, 10);
+                        console.log(nid);
+                        if (nid > -1) {
+                            switch (nid) {
+                                case 1:
+                                    this.p.url = "data1.json";
+                                    break;
+                                case 2:
+                                    this.p.url = "data2.json";
+                                    break;
+                                case 3:
+                                    this.p.url = "data3.json";
+                                    break;
+                                case 23:
+                                    this.p.url = "data23.json";
+                                    break;
+                            }
+                        }
+                    }
+                },
+                "width": "780",
+                "hoverrows": false,
+                "viewrecords": false,
+                "gridview": true,
+                "height": "auto",
+                "sortname": "lft",
+                "loadonce": false,
+                "rowNum": 100,
+                "scrollrows": true,
+                // enable tree grid
+                "treeGrid": true,
+                // which column is expandable
+                "ExpandColumn": "name",
+                // datatype
+                "treedatatype": "json",
+                // the model used
+                "treeGridModel": "nested",
+                // configuration of the data comming from server
+                "treeReader": {
+                    "left_field": "lft",
+                    "right_field": "rgt",
+                    "level_field": "level",
+                    "leaf_field": "isLeaf",
+                    "expanded_field": "expanded",
+                    "loaded": "loaded",
+                    "icon_field": "icon"
+                },
+                "sortorder": "asc",
+                "datatype": "json",
+                "pager": "#pager_list"
+			});
+		});
+    </script>
+}

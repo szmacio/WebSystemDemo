@@ -1,0 +1,41 @@
+﻿@model JuCheap.Models.ResetPasswordDto
+
+@{
+    ViewBag.Title = "重置密码";
+    Layout = "~/Views/Shared/_Layout_Content.cshtml";
+}
+
+<div class="wrapper wrapper-content">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>重置密码</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            @using (Html.BeginForm("ResetPwd", "User", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Password)：</label>
+                    <div class="col-sm-8">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "新密码" })
+                        @Html.ValidationMessageFor(m => m.Password)
+                        @Html.HiddenFor(m => m.UserId)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                        <button class="btn btn-info" type="submit" id="btnSave">重置</button>
+                        <button class="btn btn-white" type="button" id="btnBack" data-type="url">返回</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/content/js/user", "~/content/js/action")
+}

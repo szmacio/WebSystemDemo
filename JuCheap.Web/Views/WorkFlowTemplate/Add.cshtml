@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "添加";
+    Layout = "~/Views/Shared/_Layout_Content.cshtml";
+}
+@section styles
+{
+<link href="~/Content/js/plugins/gooflow/GooFlow2.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/js/plugins/gooflow/default.css" rel="stylesheet" />
+
+}
+
+<div class="wrapper wrapper-content">
+    <div class="col-sm-8">
+        <div id="flowPanel" class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>流程图设计</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-12 control-label">
+                            <input class="btn btn-info" type="button" value="保存" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <b>工作流模板名称：</b>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input type="text" class="form-control" id="WorkFlowTemplateName"/>
+                        </div>
+                    </div>
+                </div>
+                <div id="gooFlow"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>属性设置</h5>
+            </div>
+            <div class="ibox-content">
+                <div id="propertyForm" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-12 control-label">
+                            <input class="btn btn-primary" type="button" value="设置节点属性" onclick="setProperty()" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">节点名称：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="ele_name"/>
+                            <input type="hidden" id="ele_id" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label">操作人员：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="ele_operator" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    @Scripts.Render("~/content/js/jqueryValidate", "~/content/js/action")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/js/plugins/gooflow/GooFunc.js"></script>
+    <script src="~/Content/js/json2.js"></script>
+    <script src="~/Content/js/plugins/gooflow/GooFlow.js"></script>
+    <script src="~/Content/js/plugins/gooflow/GooFlow_color.js"></script>
+    <script type="text/javascript">
+        var gooFlowWidth = $("#flowPanel").width() - 40;
+        var jsondata = { "title": "手机上网套餐办理", "nodes": { "demo_node_1": { "name": "子树入口", "left": 295, "top": 0, "type": "start round", "width": 24, "height": 24 }, "demo_node_2": { "name": "广告语", "left": 256, "top": 79, "type": "state", "width": 86, "height": 24 }, "demo_node_3": { "name": "菜单", "left": 265, "top": 146, "type": "join", "width": 86, "height": 24 }, "demo_node_7": { "name": "流量叠加包", "left": 433, "top": 149, "type": "join", "width": 109, "height": 24 }, "demo_node_8": { "name": "手机上网套餐", "left": 247, "top": 246, "type": "join", "width": 117, "height": 25 }, "demo_node_9": { "name": "夜猫套餐", "left": 64, "top": 253, "type": "join", "width": 86, "height": 24 }, "demo_node_15": { "name": "套餐及上网流量剩余查询", "left": 93, "top": 140, "type": "node", "width": 119, "height": 36 }, "demo_node_17": { "name": "10元夜猫", "left": 106, "top": 358, "type": "node", "width": 86, "height": 24 }, "demo_node_18": { "name": "5元夜猫", "left": 2, "top": 363, "type": "node", "width": 86, "height": 24 }, "demo_node_21": { "name": "2元叠加包", "left": 591, "top": 2, "type": "node", "width": 86, "height": 24 }, "demo_node_22": { "name": "5元叠加包", "left": 598, "top": 45, "type": "node", "width": 86, "height": 24 }, "demo_node_23": { "name": "10元叠加包", "left": 603, "top": 102, "type": "node", "width": 102, "height": 24 }, "demo_node_24": { "name": "20元叠加包", "left": 606, "top": 147, "type": "node", "width": 106, "height": 24 }, "demo_node_25": { "name": "30元叠加包", "left": 597, "top": 224, "type": "node", "width": 113, "height": 24 }, "demo_node_26": { "name": "5元套餐", "left": 87, "top": 448, "type": "node", "width": 86, "height": 24 }, "demo_node_27": { "name": "8元套餐", "left": 210, "top": 405, "type": "node", "width": 86, "height": 24 }, "demo_node_28": { "name": "10元套餐", "left": 272, "top": 451, "type": "node", "width": 91, "height": 24 }, "demo_node_29": { "name": "20元套餐", "left": 341, "top": 412, "type": "node", "width": 91, "height": 24 }, "demo_node_30": { "name": "30元套餐", "left": 460, "top": 437, "type": "node", "width": 91, "height": 24 }, "demo_node_31": { "name": "50元套餐", "left": 580, "top": 464, "type": "node", "width": 92, "height": 24 }, "demo_node_32": { "name": "GPRS功能办理", "left": 683, "top": 464, "type": "node", "width": 130, "height": 24 } }, "lines": { "demo_line_4": { "type": "sl", "from": "demo_node_1", "to": "demo_node_2", "name": "" }, "demo_line_5": { "type": "sl", "from": "demo_node_2", "to": "demo_node_3", "name": "" }, "demo_line_11": { "type": "sl", "from": "demo_node_3", "to": "demo_node_7", "name": "2" }, "demo_line_12": { "type": "sl", "from": "demo_node_3", "to": "demo_node_8", "name": "1" }, "demo_line_13": { "type": "sl", "from": "demo_node_3", "to": "demo_node_9", "name": "3" }, "demo_line_16": { "type": "sl", "from": "demo_node_3", "to": "demo_node_15", "name": "4" }, "demo_line_19": { "type": "sl", "from": "demo_node_9", "to": "demo_node_17", "name": "2" }, "demo_line_20": { "type": "sl", "from": "demo_node_9", "to": "demo_node_18", "name": "1" }, "demo_line_33": { "type": "sl", "from": "demo_node_7", "to": "demo_node_21", "name": "1" }, "demo_line_34": { "type": "sl", "from": "demo_node_7", "to": "demo_node_22", "name": "2" }, "demo_line_35": { "type": "sl", "from": "demo_node_7", "to": "demo_node_23", "name": "3" }, "demo_line_36": { "type": "sl", "from": "demo_node_7", "to": "demo_node_24", "name": "4" }, "demo_line_37": { "type": "sl", "from": "demo_node_7", "to": "demo_node_25", "name": "5" }, "demo_line_39": { "type": "sl", "from": "demo_node_8", "to": "demo_node_26", "name": "1" }, "demo_line_42": { "type": "sl", "from": "demo_node_8", "to": "demo_node_29", "name": "4" }, "demo_line_43": { "type": "sl", "from": "demo_node_8", "to": "demo_node_30", "name": "5" }, "demo_line_44": { "type": "sl", "from": "demo_node_8", "to": "demo_node_31", "name": "6" }, "demo_line_45": { "type": "sl", "from": "demo_node_8", "to": "demo_node_32", "name": "7" }, "demo_line_46": { "type": "sl", "from": "demo_node_8", "to": "demo_node_27", "name": "2" }, "demo_line_47": { "type": "sl", "from": "demo_node_8", "to": "demo_node_28", "name": "3" } }, "areas": {}, "initNum": 48 };
+        var property = {
+            width: gooFlowWidth,
+            height: 600,
+            //toolBtns:["start round","end round","task round","node","chat","state","plug","join","fork","complex mix"],
+            toolBtns: ["start round", "end round", "node"],
+            haveHead: true,
+            //headBtns:["new","open","save","undo","redo","reload"],//如果haveHead=true，则定义HEAD区的按钮
+            headBtns: [],
+            haveTool: true,
+            haveGroup: true,
+            useOperStack: true
+        };
+        var remark = {
+            "cursor": "选择指针",
+            "direct": "连接线",
+            "start": "开始结点",
+            "end": "结束结点",
+            "node": "任务结点",
+            "task": "自动结点",
+            "chat": "决策结点",
+            "state": "状态结点",
+            "plug": "附加插件",
+            "fork": "分支结点",
+            "join": "联合结点",
+            "complex mix": "复合结点",
+            "group": "组织划分框编辑开关",
+            "mutiselect": "多选"
+        };
+        var gooFlow;
+        $(document).ready(function() {
+            gooFlow = $.createGooFlow($("#gooFlow"), property);
+            gooFlow.setNodeRemarks(remark);
+            gooFlow.loadData(jsondata);
+            gooFlow.onItemFocus = function(id, model) {
+                var obj;
+                $("#ele_model").val(model);
+                $("#ele_id").val(id);
+                if (model == "line") {
+                    obj = this.$lineData[id];
+                    $("#ele_name").val(obj.name);
+                    $("#ele_operator").val("");
+                } else if (model == "node") {
+                    obj = this.$nodeData[id];
+                    $("#ele_name").val(obj.name);
+                    $("#ele_operator").val(obj.operator);
+                }
+                return true;
+            };
+            gooFlow.onItemBlur = function(id, model) {
+                $("#propertyForm input[type='text']").each(function() {
+                    $(this).val('');
+                });
+                return true;
+            };
+            //单元节点双击事件
+            gooFlow.$workArea.delegate(".ico + td", "dblclick", { inthis: gooFlow }, function(e) {
+                alert("dblclick");
+            });
+            //单元连接线双击事件
+            var tmpClk = "PolyLine";
+            if (GooFlow.prototype.useSVG != "")
+                tmpClk = "g";
+            $(gooFlow.$draw).delegate(tmpClk, "dblclick", { inthis: gooFlow }, function(e) {
+                if (GooFlow.prototype.useSVG != "") {
+                    alert(this.id);
+                }
+            });
+        });
+
+        function Export() {
+            document.getElementById("result").value = JSON.stringify(gooFlow.exportData());
+        }
+
+        function setProperty() {
+            var focusId = $("#ele_id").val();
+            var focusNode = gooFlow.getItemInfo(focusId, "node");
+            focusNode.operator = $("#ele_operator").val();
+        }
+    </script>
+}
+

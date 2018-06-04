@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewBag.Title = "菜单首页";
+    Layout = "~/Views/Shared/_Layout_Content.cshtml";
+}
+@section styles
+{
+    <link href="/Content/css/plugins/jqgrid/ui.jqgrid.css" rel="stylesheet" />
+    <link href="~/Content/css/plugins/datapicker/datepicker3.css" rel="stylesheet" />
+}
+
+<div class="wrapper wrapper-content">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>菜单管理</h5>
+            <div class="ibox-tools">
+                <a class="collapse-link">
+                    <i class="fa fa-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+        <div class="ibox-content">
+            <div class="form-group">
+                <button id="btnAdd" type="button" class="btn btn-primary " onclick="addModel()"><i class="fa fa-plus"></i>&nbsp;添加</button>
+                <button id="btnAddAjax" type="button" class="btn btn-primary " onclick="addAjaxModel()"><i class="fa fa-plus"></i>&nbsp;Ajax模式添加</button>
+                <button id="btnEdit" type="button" class="btn btn-info " onclick="editModel()"><i class="fa fa-pencil"></i> 编辑</button>
+                <button id="btnDel" type="button" class="btn btn-danger " onclick="delData()">
+                    <i class="fa fa-remove"></i>&nbsp;&nbsp;<span class="bold">删除</span>
+                </button>
+            </div>
+
+            @Html.Partial("SearchPanel")
+
+            <div class="jqGrid_wrapper">
+                <table id="table_list"></table>
+                <div id="pager_list"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/content/js/list")
+    <script src="~/Content/js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/js/plugins/jqgrid/jqGrid.complexGroupHeaders.js"></script>
+    <script>
+        function searchData() { //搜索
+            var json = {
+                keywords: $("#txtSearchKey").val()
+            };
+            XPage.Search(json);
+        }
+
+        function addModel() {
+            $("#btnAdd").button("loading");
+            window.location.href = "@Url.Action("Add")";
+        }
+
+        function addAjaxModel() {
+            parent.layer.open({
+                title: '添加菜单',
+                type: 2,
+                content: "@Url.Action("AddAjax")",
+                area: ['800px', '60%']
+            });
+        }
+
+        function editModel() { //编辑
+            var row = JucheapGrid.GetData();
+            if (row != null) {
+                $("#btnEdit").button("loading");
+                window.location.href = "@Url.Action("Edit")/" + row.Id;
+            } else {
+                parent.layer.alert("请选择要编辑的数据");
+            }
+        }
+
+        function delData() { //删除
+            XPage.DelData("@Url.Action("Delete")");
+        }
+
+        function exportData() { //导出
+            window.location.href = "@Url.Action("Index_Exports")?keywords=" + $("#txtSearchKey").val();
+        }
+        function exportPdfData() { //导出Pdf
+            window.location.href = "@Url.Action("Index_Exports_Pdf")?keywords=" + $("#txtSearchKey").val();
+        }
+        function showChildGrid(parentRowId, parentRowKey) {
+            var childGridId = parentRowId + "_table";
+            var childGridPagerId = parentRowId + "_pager";
+
+            // add a table and pager HTML elements to the parent grid row - we will render the child grid here
+            $('#' + parentRowId).append('<table id=' + childGridId + '></table><div id=' + childGridPagerId + '></div>');
+            var subConfig = {
+                id: childGridId,
+                pagerId: childGridPagerId,
+                shrinkToFit: true,
+                rowNum: 5,
+                title: '列表',
+                url: '@Url.Action("GetSubGridListWithPager")',
+                colNames: ['主键', '名称', '描述'],
+                colModel: [
+                    { name: 'Id', index: 'Id', width: 60, key: true, hidden: true },
+                    { name: 'Name', index: 'Name', width: 60 },
+                    { name: 'Url', index: 'Url', width: 100 }
+                ]
+            };
+            JucheapGrid.Load(subConfig);
+        }
+        $(document).ready(function() {
+            var config = {
+                title: '菜单列表',
+                shrinkToFit: true,
+                multiselect: false,
+                url: '@Url.Action("GetListWithPager")',
+                mtype: 'post',
+                colNames: ['主键', '菜单名称', '类型', 'URL地址', '排序', '创建日期'],
+                colModel: [
+                    { name: 'Id', index: 'Id', width: 60, key: true, hidden: true, search: false, dataType: "text" },
+                    { name: 'Name', index: 'Name', width: 260, search: true, dataType: "text" },
+                    {
+                        name: 'Type',
+                        index: 'Type',
+                        width: 160,
+                        dataType: "text",
+                        formatter: function(cellValue, options, rowObject) {
+                            return rowObject.TypeName;
+                        }
+                    },
+                    { name: 'Url', index: 'Url', width: 360, search: true, dataType: "text" },
+                    {
+                        name: 'Order', index: 'Order', width: 260, search: true, dataType: "text",
+                        summaryTpl: "合计: {0}", // set the summary template to show the group summary
+                        summaryType: "sum" // set the formula to calculate the summary type
+                    },
+                    {
+                        name: 'CreateDateTime',
+                        index: 'CreateDateTime',
+                        width: 360,
+                        search: true,
+                        dataType: "date",
+                        formatter: function (cellValue, options, rowObject) {
+                            return cellValue.getDate();
+                        }
+                    }
+                ],
+                subGrid: true,
+                subGridOptions: {
+                    "plusicon": "fa fa-angle-right",
+                    "minusicon": "fa fa-angle-down",
+                    "openicon": "fa fa-list-alt",
+                    "expandOnLoad": false
+                },
+                subGridRowExpanded: showChildGrid,
+                footerrow: true,
+                userDataOnFooter: true,
+                gridComplete: function (data) {
+                    var $gridTable = $("#table_list");
+                    $gridTable.footerData("set", {
+                        Url: '合计:' + 20,
+                        Order: '合计:' + 30
+                    });
+                }
+            };
+            JucheapGrid.Load(config);
+            XPage.InitCondition("table_list");
+            $("#table_list").setComplexGroupHeaders({
+                useColSpanStyle: true,
+                groupHeaders: [{
+                    startColumnName: 'Name',
+                    numberOfColumns: 2,
+                    titleText: '二级表头-1'
+                }, {
+                    startColumnName: 'Order',
+                    numberOfColumns: 2,
+                    titleText: '二级表头-2'
+                }],
+                complexGroupHeaders: [{
+                    startColumnName: 'Name',
+                    numberOfColumns: 3,
+                    titleText: '三级表头'
+                }]
+            });
+            $('#table_list').navGrid("#pager_list", {
+                search: true, // show search button on the toolbar
+                add: false,
+                edit: false,
+                del: false,
+                refresh: true
+            });
+            $("#btnSearch").bind("click", searchData);
+        });
+    </script>
+}

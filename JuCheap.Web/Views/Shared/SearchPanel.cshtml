@@ -1,0 +1,49 @@
+﻿<div class="row">
+    <div class="col-sm-1">
+        <select id="txtSearchGroupOperator" class="form-control m-b">
+            <option value="And">并且</option>
+            <option value="Or">或者</option>
+        </select>
+    </div>
+    <div class="col-sm-11">
+        <button id="btnAddCondition" class="btn btn btn-success" type="button"> <i class="fa fa-plus-circle"></i> 添加搜索条件</button>
+        <button id="btnAdvanceSearch" class="btn btn btn-primary" type="button"> <i class="fa fa-search"></i> 搜索</button>
+    </div>
+</div>
+
+<div id="panel-condition">
+    <div class="row">
+        <div class="col-sm-2">
+            <select name="FieldName" class="form-control m-b" onchange="XPage.ChangeControler(this)">
+                
+            </select>
+        </div>
+        <div class="col-sm-1">
+            <select name="Operator" class="form-control m-b">
+                <option value="eq" selected="selected">等于 </option>
+                <option value="ne">不等 </option>
+                <option value="bw">开始于</option>
+                <option value="bn">不开始于</option>
+                <option value="ew">结束于</option>
+                <option value="en">不结束于</option>
+                <option value="cn">包含 </option>
+                <option value="nc">不包含</option>
+                <option value="nu">不存在</option>
+                <option value="nn">存在</option>
+                <option value="in">属于 </option>
+                <option value="ni">不属于</option>
+            </select>
+        </div>
+        <div class="col-sm-2">
+            <div class="input-group">
+                <div class="input-group">
+                    <span class="input-group-addon hidden"><i class="fa fa-calendar"></i></span>
+                    <input name="FieldData" type="text" class="form-control" />
+                </div>
+                <span class="input-group-btn" title="删除">
+                    <button class="btn btn btn-danger" type="button" onclick="XPage.DelCondition(this)"> <i class="fa fa-times-circle"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

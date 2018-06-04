@@ -1,0 +1,36 @@
+﻿@model JuCheap.Models.DepartmentDto
+
+@{
+    ViewBag.Title = "编辑";
+    Layout = "~/Views/Shared/_Layout_Content.cshtml";
+}
+<div class="wrapper wrapper-content">
+@using (Html.BeginForm("Edit", "Department", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="form-group">
+        <label class="col-sm-3 control-label">@Html.LabelFor(m => m.ParentName)：</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.ParentName, new { @class = "form-control disabled", disabled = "disabled" })
+            @Html.HiddenFor(m => m.ParentId)
+            @Html.HiddenFor(m => m.Id)
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Name)：</label>
+        <div class="col-sm-8">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "菜单名称" })
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-8">
+            <button class="btn btn-info" type="submit">保存</button>
+            <button class="btn btn-white" type="button" id="btnBack" data-type="window">返回</button>
+        </div>
+    </div>
+}
+</div>
+@section scripts{
+    @Scripts.Render("~/content/js/jqueryValidate")
+    @Scripts.Render("~/content/js/action")
+}

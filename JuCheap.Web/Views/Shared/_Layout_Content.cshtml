@@ -1,0 +1,26 @@
+﻿@using StackExchange.Profiling
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOM网站信息管理平台</title>
+    @Styles.Render("~/content/css/content-base")
+    @RenderSection("styles", false)
+    @Html.Partial("BaiduTongji")
+</head>
+
+<body class="gray-bg">
+    @RenderBody()
+    @MiniProfiler.RenderIncludes()
+    @Scripts.Render("~/Content/js/base")
+    @RenderSection("scripts", false)
+</body>
+</html>
+
