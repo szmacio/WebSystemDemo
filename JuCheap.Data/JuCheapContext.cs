@@ -35,7 +35,8 @@ namespace JuCheap.Data
         /// Department
         /// </summary>
         public DbSet<DepartmentEntity> Departments { get; set; }
-		/// <summary>
+        public DbSet<SinglePageEntity> SinglePages { get; set; }
+        /// <summary>
         /// EmailSubscribe
         /// </summary>
         public DbSet<EmailSubscribeEntity> EmailSubscribes { get; set; }
