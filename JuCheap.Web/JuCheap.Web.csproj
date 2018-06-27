@@ -903,11 +903,11 @@
     <Content Include="Views\Pages\Tabs.cshtml" />
     <Content Include="Views\Pages\Tables.cshtml" />
     <Content Include="Views\Menu\FontAwesome.cshtml" />
+    <Content Include="Views\SinglePage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\" />
-    <Folder Include="Views\SinglePage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configs\Scripts.config" />

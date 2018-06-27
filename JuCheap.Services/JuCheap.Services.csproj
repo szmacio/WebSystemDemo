@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="AppServices\EmailSubscribeService.cs" />
     <Compile Include="AppServices\ProxyIpService.cs" />
+    <Compile Include="AppServices\SinglePageService.cs" />
     <Compile Include="AppServices\SiteViewService.cs" />
     <Compile Include="AppServices\DatabaseInitService.cs" />
     <Compile Include="AppServices\AreaService.cs" />

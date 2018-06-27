@@ -9,13 +9,12 @@ namespace JuCheap.Web.Controllers
 {
     public class SinglePageController : BaseController
     {
-        private readonly ILogService _logService;
-        private readonly ISiteViewService _siteViewService;
+        private readonly ISinglePageService _singlePageService;
+      
         // GET: SinglePageculturecontact
-        public SinglePageController(ILogService logService, ISiteViewService siteViewService)
+        public SinglePageController(ISinglePageService singlePageService)
         {
-            _logService = logService;
-            _siteViewService = siteViewService;
+            _singlePageService = singlePageService;
         }
         public ActionResult Index()
         {

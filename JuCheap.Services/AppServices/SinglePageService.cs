@@ -47,22 +47,28 @@ namespace JuCheap.Services.AppServices
             }
         }
 
-        Task<bool> ISinglePageService.Delete(IEnumerable<string> ids)
+        async Task<bool> ISinglePageService.Delete(IEnumerable<string> ids)
         {
-            throw new NotImplementedException();
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var entities = await db.SinglePages.Where(item => ids.Contains(item.Id)).ToListAsync();
+                foreach (var menuEntity in entities)
+                {
+                    menuEntity.IsDeleted = true;
+                }
+                await scope.SaveChangesAsync();
+                return true;
+            }
         }
 
-        Task<SinglePageDto> ISinglePageService.Find(string id)
+         async Task<SinglePageDto> ISinglePageService.Find(string id)
         {
             using (var scope = _dbContextScopeFactory.Create())
             {
                 var db = scope.DbContexts.Get<JuCheapContext>();
                  var entity = await db.SinglePages.LoadAsync(id);
-                var dto = _mapper.Map<SinglePageDto, SinglePageEntity>(entity);
-                if (entity.Department != null)
-                {
-                    dto.DepartmentName = entity.Department.FullName;
-                }
+                var dto = _mapper.Map<SinglePageEntity,SinglePageDto>(entity);
                 return dto;
             }
         }
