@@ -26,6 +26,7 @@ namespace JuCheap.Models
         /// 作者
         /// </summary>
         public string Author { get; set; }
-
+        public string Id { get; set; }
+        public DateTime CreateDateTime { get; set; }
     }
 }

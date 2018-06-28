@@ -468,7 +468,7 @@ namespace JuCheap.Data
                     new SystemConfigEntity
                     {
                         Id = _instance.GetId(),
-                        SystemName = "JuCheap",
+                        SystemName = "后台管理",
                         IsDataInited = true,
                         DataInitedDate = _now,
                         CreateDateTime = _now,

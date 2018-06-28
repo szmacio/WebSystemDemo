@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters\PageFilter.cs" />
     <Compile Include="ProxyIpDto.cs" />
     <Compile Include="AreaDto.cs" />
     <Compile Include="DepartmentDto.cs" />

@@ -33,6 +33,32 @@ namespace JuCheap.Services.AppServices
             _mapper = mapper;
         }
 
+        public async Task<PagedResult<SinglePageDto>> Search(PageFilter filters)
+        {
+            if (filters == null)
+                return new PagedResult<SinglePageDto>(1, 0);
+
+            using (var scope = _dbContextScopeFactory.CreateReadOnly())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var query = db.SinglePages
+                    .WhereIf(filters.keywords.IsNotBlank(), x => x.PageName.Contains(filters.keywords) ||
+                                                                 x.Title.Contains(filters.keywords));
+
+                return await query.OrderByCustom(filters.sidx, filters.sord)
+                    .Select(x => new SinglePageDto
+                    {
+                        Id = x.Id,
+                        PageName = x.PageName,
+                        Title = x.Title,
+                        Content = x.Content,
+                        Author = x.Author,
+                        CreateDateTime = x.CreateDateTime,
+
+                    }).PagingAsync(filters.page, filters.rows);
+            }
+        }
+
         async Task<string> ISinglePageService.Add(SinglePageDto singlepage)
         {
             using (var scope = _dbContextScopeFactory.Create())

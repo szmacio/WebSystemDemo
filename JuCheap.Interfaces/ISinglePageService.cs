@@ -18,6 +18,12 @@ namespace JuCheap.Interfaces
         /// <param name="dto">用户模型</param>
         /// <returns></returns>
         Task<string> Add(SinglePageDto dto);
+        /// <summary>
+        /// 分页搜索
+        /// </summary>
+        /// <param name="filters">查询过滤参数</param>
+        /// <returns></returns>
+        Task<PagedResult<SinglePageDto>> Search(PageFilter filters);
 
         /// <summary>
         /// 更新单页

@@ -12,6 +12,7 @@
 
 
 using System;
+using System.Collections.Generic;
 
 namespace JuCheap.Data.Entity
 {
@@ -20,7 +21,11 @@ namespace JuCheap.Data.Entity
     /// </summary>
     public class SinglePageEntity : BaseEntity
     {
-       
+
+        public SinglePageEntity()
+        {
+            Roles = new List<RoleEntity>();
+        }
 
         /// <summary>
         /// 页面类型
@@ -41,7 +46,10 @@ namespace JuCheap.Data.Entity
         /// 作者
         /// </summary>
         public string Author { get; set; }
-      
-     
+
+        /// <summary>
+        /// 所属角色
+        /// </summary>
+        public IList<RoleEntity> Roles { get; set; }
     }
 }
