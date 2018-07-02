@@ -94,6 +94,7 @@
     <Compile Include="Message.cs" />
     <Compile Include="RoleDto.cs" />
     <Compile Include="RoleMenuDto.cs" />
+    <Compile Include="SinglePageAddDto.cs" />
     <Compile Include="SinglePageDto.cs" />
     <Compile Include="SiteViewDto.cs" />
     <Compile Include="TreeDto.cs" />

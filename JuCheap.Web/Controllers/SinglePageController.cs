@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using JuCheap.Infrastructure.Extentions;
 using JuCheap.Interfaces;
+using JuCheap.Models;
 using JuCheap.Models.Filters;
 using JuCheap.Web.Filters;
 using System;
@@ -34,6 +36,45 @@ namespace JuCheap.Web.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Add()
+        {
+            return View(new SinglePageAddDto());
+        }
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public async Task<ActionResult> Add(SinglePageDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                string content = Request.Form["editorValue"];
+                dto.Content = content;
+                var result = await _singlePageService.Add(dto);
+                if (result.IsNotBlank())
+                    return RedirectToAction("Index");
+            }
+            return View(dto);
+        }
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ActionResult> Edit(string id)
+        {
+            var dto = await _singlePageService.Find(id);
+            return View(dto);
+        }
+
         public ActionResult Introduction()
         {
             return View();
