@@ -57,7 +57,7 @@ namespace JuCheap.Web.Controllers
             if (ModelState.IsValid)
             {
                 string content = Request.Form["editorValue"];
-                dto.Content = content;
+                dto.Content = Server.HtmlEncode(content);
                 var result = await _singlePageService.Add(dto);
                 if (result.IsNotBlank())
                     return RedirectToAction("Index");
