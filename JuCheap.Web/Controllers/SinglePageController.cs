@@ -4,6 +4,7 @@ using JuCheap.Interfaces;
 using JuCheap.Models;
 using JuCheap.Models.Filters;
 using JuCheap.Web.Filters;
+using JuCheap.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,7 @@ namespace JuCheap.Web.Controllers
             {
                 string content = Request.Form["editorValue"];
                 dto.Content = Server.HtmlEncode(content);
+          
                 var result = await _singlePageService.Add(dto);
                 if (result.IsNotBlank())
                     return RedirectToAction("Index");
@@ -74,7 +76,38 @@ namespace JuCheap.Web.Controllers
             var dto = await _singlePageService.Find(id);
             return View(dto);
         }
+        /// <summary>
+        /// 编辑
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(SinglePageDto dto)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _singlePageService.Update(dto);
+                if (result)
+                    return RedirectToAction("Index");
+            }
+            return View(dto);
+        }
 
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        public async Task<JsonResult> Delete(IList<string> ids)
+        {
+            var result = new JsonResultModel<bool>();
+            if (ids.AnyOne())
+            {
+                result.flag = await _singlePageService.Delete(ids);
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Introduction()
         {
             return View();

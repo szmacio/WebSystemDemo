@@ -15,10 +15,58 @@
                 </a>
             </div>
         </div>
- 2222
+        <div class="ibox-content">
+            @using (Html.BeginForm("Edit", "SinglePage", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.PageName)：</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.PageName, new { @class = "form-control", placeholder = "单页名称", @readonly = "readonly" })
+                        @Html.HiddenFor(m => m.Id)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Author)：</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.Author, new { @class = "form-control", placeholder = "作者" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Content)：</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.Content, new { @class = "form-control", placeholder = "内容" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                        <button class="btn btn-info" type="submit" id="btnSave">保存</button>
+                        <button class="btn btn-white" type="button" id="btnBack" data-type="url">返回</button>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>
+
 @section styles
 {
     <link href="~/Content/js/select2/css/select2.min.css" rel="stylesheet" />
 }
+<script src="~/Content/js/ueeditor/ueditor.config.js"></script>
+<script src="~/Content/js/ueeditor/ueditor.all.min.js"></script>
+<script src="~/Content/js/ueeditor/ang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+
+       //实例化编辑器
+       //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    var ue = UE.getEditor('editor');
+    function getContent() {
+        var arr = [];
+        arr.push("使用editor.getContent()方法可以获得编辑器的内容");
+        arr.push("内容为：");
+        arr.push(UE.getEditor('editor').getContent());
+        alert(arr.join("\n"));
+    }
+
+</script>

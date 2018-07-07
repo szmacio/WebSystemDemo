@@ -98,10 +98,23 @@ namespace JuCheap.Services.AppServices
                 return dto;
             }
         }
-
-        Task<bool> ISinglePageService.Update(SinglePageDto dto)
+        /// <summary>
+        /// 更新单页
+        /// </summary>
+        /// <param name="dto">菜单模型</param>
+        /// <returns></returns>
+     async Task<bool> ISinglePageService.Update(SinglePageDto dto)
         {
-            throw new NotImplementedException();
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var entity = await db.SinglePages.LoadAsync(dto.Id);
+                entity.PageName = dto.PageName;
+                entity.Author = dto.Author;
+                entity.Content = dto.Content;
+                await scope.SaveChangesAsync();
+                return true;
+            }
         }
     }
 }
