@@ -36,6 +36,11 @@ namespace JuCheap.Data
         /// </summary>
         public DbSet<DepartmentEntity> Departments { get; set; }
         public DbSet<SinglePageEntity> SinglePages { get; set; }
+        public DbSet<NewsInfoEntity> NewsInfos { get; set; }
+        public DbSet<NewsTypeEntity> NewsTypeInfos { get; set; }
+        public DbSet<ProductEntity> Products { get; set; }
+        public DbSet<ProductTypeEntity> ProductTypes { get; set; }
+        public DbSet<MessageInfoEntity> MessageInfos { get; set; }
         /// <summary>
         /// EmailSubscribe
         /// </summary>

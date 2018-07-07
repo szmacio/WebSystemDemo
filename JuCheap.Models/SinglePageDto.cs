@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JuCheap.Models
 {
+
+
     /// <summary>
     /// 登录日志
     /// </summary>

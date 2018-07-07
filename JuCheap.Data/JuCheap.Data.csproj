@@ -64,6 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\EmailSubscribeConfig.cs" />
+    <Compile Include="Config\ProductTypeConfig.cs" />
+    <Compile Include="Config\MessageInfoConfig.cs" />
+    <Compile Include="Config\ProductConfig.cs" />
+    <Compile Include="Config\NewsInfoConfig.cs" />
+    <Compile Include="Config\NewsTypeConfig.cs" />
     <Compile Include="Config\SinglePageConfig.cs" />
     <Compile Include="Config\SiteViewConfig.cs" />
     <Compile Include="Config\ProxyIpConfig.cs" />
@@ -81,6 +86,11 @@
     <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Entity\DepartmentEntity.cs" />
     <Compile Include="Entity\EmailSubscribeEntity.cs" />
+    <Compile Include="Entity\NewsInfoEntity.cs" />
+    <Compile Include="Entity\MessageInfoEntity.cs" />
+    <Compile Include="Entity\ProductTypeEntity.cs" />
+    <Compile Include="Entity\NewsTypeEntity.cs" />
+    <Compile Include="Entity\ProductEntity.cs" />
     <Compile Include="Entity\SinglePageEntity.cs" />
     <Compile Include="Entity\PathCodeEntity.cs" />
     <Compile Include="Entity\ProxyIpEntity.cs" />
