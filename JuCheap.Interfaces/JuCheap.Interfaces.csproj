@@ -67,6 +67,9 @@
   <ItemGroup>
     <Compile Include="IEmailSubscribeService.cs" />
     <Compile Include="IProxyIpService.cs" />
+    <Compile Include="IProductService.cs" />
+    <Compile Include="INewsService.cs" />
+    <Compile Include="IMessageInfoService.cs" />
     <Compile Include="ISinglePageService.cs" />
     <Compile Include="ISiteViewService.cs" />
     <Compile Include="IDatabaseInitializer.cs" />

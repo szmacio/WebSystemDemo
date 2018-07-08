@@ -269,7 +269,12 @@
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\MessageInfoController.cs" />
+    <Compile Include="Controllers\NewController.cs" />
+    <Compile Include="Controllers\NewListController.cs" />
+    <Compile Include="Controllers\ProductListController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SinglePageController.cs" />
     <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -1038,6 +1043,11 @@
     <Content Include="Views\SinglePage\Index.cshtml" />
     <Content Include="Views\SinglePage\Add.cshtml" />
     <Content Include="Views\SinglePage\Edit.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\ProductList\Index.cshtml" />
+    <Content Include="Views\New\Index.cshtml" />
+    <Content Include="Views\NewList\Index.cshtml" />
+    <Content Include="Views\MessageInfo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

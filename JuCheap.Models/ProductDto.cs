@@ -1,21 +1,12 @@
-﻿
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-
-using System;
-using System.Collections.Generic;
-
-namespace JuCheap.Data.Entity
+namespace JuCheap.Models
 {
-    /// <summary>
-    /// 单页
-    /// </summary>
-    public class ProductEntity  : BaseEntity
-    {
 
-        public ProductEntity()
-        {
-            Roles = new List<RoleEntity>();
-        }
+
+    public class ProductDto
+    {
 
         #region Model
         private string _proname;
@@ -109,10 +100,5 @@ namespace JuCheap.Data.Entity
             get { return _promonery; }
         }
         #endregion Model
-
-        /// <summary>
-        /// 所属角色
-        /// </summary>
-        public IList<RoleEntity> Roles { get; set; }
     }
 }

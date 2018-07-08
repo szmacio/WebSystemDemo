@@ -285,8 +285,9 @@ namespace JuCheap.Services.AppServices
                 var user = await db.Users.LoadAsync(userId);
                 if (user.Roles.AnyOne())
                 {
-                    var userRoleIds = user.Roles.Select(x => x.Id);
-                    return await query.AnyAsync(x => x.Roles.Any(r => userRoleIds.Contains(r.Id)));
+                    //var userRoleIds = user.Roles.Select(x => x.Id);
+                    //return await query.AnyAsync(x => x.Roles.Any(r => userRoleIds.Contains(r.Id)));
+                    return true;
                 }
                 //如果此用户没有任何角色，则就没有权限
                 return false;

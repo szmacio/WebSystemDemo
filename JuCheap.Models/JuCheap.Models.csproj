@@ -95,6 +95,11 @@
     <Compile Include="RoleDto.cs" />
     <Compile Include="RoleMenuDto.cs" />
     <Compile Include="SinglePageAddDto.cs" />
+    <Compile Include="ProductDto.cs" />
+    <Compile Include="NewsTypeDto.cs" />
+    <Compile Include="MessageInfoDto.cs" />
+    <Compile Include="NewsInfoDto.cs" />
+    <Compile Include="ProductType.cs" />
     <Compile Include="SinglePageDto.cs" />
     <Compile Include="SiteViewDto.cs" />
     <Compile Include="TreeDto.cs" />
