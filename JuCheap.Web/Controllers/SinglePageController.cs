@@ -51,7 +51,7 @@ namespace JuCheap.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
+   
         [ValidateInput(false)]
         public async Task<ActionResult> Add(SinglePageDto dto)
         {
