@@ -23,11 +23,11 @@ namespace JuCheap.Web
             {
                 HandleAjaxRequestError(filterContext);
             }
-            //else if (filterContext.Exception.IsTipOrRequestValidationException())
-            //{
-            //    HandleRequestWithTipException(filterContext);
-            //}
-            
+            else if (filterContext.Exception.IsTipOrRequestValidationException())
+            {
+                HandleRequestWithTipException(filterContext);
+            }
+
             base.OnException(filterContext);
         }
         /// <summary>

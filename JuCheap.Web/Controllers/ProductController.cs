@@ -29,7 +29,7 @@ namespace JuCheap.Web.Controllers
         [IgnoreRightFilter]
         public async Task<JsonResult> GetListWithPager(PageFilter filters)
         {
-            var result = await _productService.Search(filters);
+            var result = await _productService.SearchType(filters);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -44,21 +44,18 @@ namespace JuCheap.Web.Controllers
         /// <returns></returns>
         public ActionResult Add()
         {
-            return View(new ProductDto());
+            return View(new ProductTypeDto());
         }
         /// <summary>
         /// 添加
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public async Task<ActionResult> Add(ProductDto dto)
+        public async Task<ActionResult> Add(ProductTypeDto dto)
         {
             if (ModelState.IsValid)
             {
-                string content = Request.Form["editorValue"];
-                var result = await _productService.Add(dto);
+                var result = await _productService.AddType(dto);
                 if (result.IsNotBlank())
                     return RedirectToAction("Index");
             }
@@ -71,7 +68,7 @@ namespace JuCheap.Web.Controllers
         /// <returns></returns>
         public async Task<ActionResult> Edit(string id)
         {
-            var dto = await _productService.Find(id);
+            var dto = await _productService.FindType(id);
             return View(dto);
         }
         /// <summary>
@@ -81,11 +78,11 @@ namespace JuCheap.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(ProductDto dto)
+        public async Task<ActionResult> Edit(ProductTypeDto dto)
         {
             if (ModelState.IsValid)
             {
-                var result = await _productService.Update(dto);
+                var result = await _productService.UpdateType(dto);
                 if (result)
                     return RedirectToAction("Index");
             }

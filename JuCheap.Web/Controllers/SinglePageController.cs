@@ -51,7 +51,6 @@ namespace JuCheap.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-   
         [ValidateInput(false)]
         public async Task<ActionResult> Add(SinglePageDto dto)
         {
@@ -82,11 +81,14 @@ namespace JuCheap.Web.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> Edit(SinglePageDto dto)
         {
+
             if (ModelState.IsValid)
             {
+                string content = Request.Form["editorValue"];
+                dto.Content = Server.HtmlEncode(content);
                 var result = await _singlePageService.Update(dto);
                 if (result)
                     return RedirectToAction("Index");

@@ -44,3 +44,60 @@
         </div>
     </div>
 </div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/content/js/list")
+    <script>
+        function addModel() {
+            $("#btnAdd").button("loading");
+            window.location.href = "@Url.Action("Add")";
+        }
+
+        function editModel() { //编辑
+            var row = JucheapGrid.GetData();
+            if (row != null) {
+                $("#btnEdit").button("loading");
+                window.location.href = "@Url.Action("Edit")/" + row.Id;
+            } else {
+                parent.layer.alert("请选择要编辑的数据");
+            }
+        }
+
+        function delData() { //删除
+            XPage.DelData("@Url.Action("Delete")");
+        }
+
+        function searchData() { //搜索
+            var json = {
+                keywords: $("#txtSearchKey").val()
+            };
+            XPage.Search(json);
+        }
+
+        $(document).ready(function() {
+            var config = {
+                title: '产品分类列表',
+                url: '@Url.Action("GetListWithPager")',
+                colNames: ['主键', '产品分类',  '创建时间'],
+                colModel: [
+                    { name: 'Id', index: 'Id', width: 60, key: true, hidden: true },
+                    { name: 'ProTypeTitle', index: 'ProTypeTitle', width: 60 },
+         
+                    {
+                        name: 'CreateDateTime',
+                        index: 'CreateDateTime',
+                        width: 60,
+                        formatter: function(cellValue, options, rowObject) {
+                            return cellValue.getDate();
+                        }
+                    }
+                ]
+            };
+            JucheapGrid.Load(config);
+            $("#btnSearch").bind("click", searchData);
+        });
+
+    </script>
+}
