@@ -1,15 +1,14 @@
 ﻿@using JuCheap.Infrastructure.Extentions
-@model JuCheap.Models.ProductTypeDto
+@model JuCheap.Models.NewsTypeDto
 @{
-    ViewBag.Title = "添加产品分类";
+    ViewBag.Title = "编辑产品分类";
     Layout = "~/Views/Shared/_Layout_Content.cshtml";
 }
-
 
 <div class="wrapper wrapper-content">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h5>添加产品分类</h5>
+            <h5>编辑新闻分类</h5>
             <div class="ibox-tools">
                 <a class="collapse-link">
                     <i class="fa fa-chevron-up"></i>
@@ -17,19 +16,16 @@
             </div>
         </div>
         <div class="ibox-content">
-            @using (Html.BeginForm("Add", "Product", FormMethod.Post, new { @class = "form-horizontal" }))
+            @using (Html.BeginForm("Edit", "New", FormMethod.Post, new { @class = "form-horizontal" }))
             {
                 @Html.AntiForgeryToken()
                 <div class="form-group">
-                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.ProTypeTitle)：</label>
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.NewsTypeTitle)：</label>
                     <div class="col-sm-8">
-                        @Html.TextBoxFor(m => m.ProTypeTitle, new { @class = "form-control", placeholder = "分类名称" })
-                        @Html.ValidationMessageFor(m => m.ProTypeTitle)
+                        @Html.TextBoxFor(m => m.NewsTypeTitle, new { @class = "form-control", placeholder = "分类名称" })
+                        @Html.ValidationMessageFor(m => m.NewsTypeTitle)
                     </div>
                 </div>
-
-           
-
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-8">
                         <button class="btn btn-info" type="submit" id="btnSave">保存</button>
@@ -38,10 +34,8 @@
                 </div>
             }
         </div>
-
     </div>
 </div>
-
 
 @section styles
 {

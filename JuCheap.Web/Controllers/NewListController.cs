@@ -51,13 +51,13 @@ namespace JuCheap.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public async Task<ActionResult> Add(NewsInfoDto dto)
         {
             if (ModelState.IsValid)
             {
                 string content = Request.Form["editorValue"];
+                dto.NewsContent = content;
                 var result = await _newService.Add(dto);
                 if (result.IsNotBlank())
                     return RedirectToAction("Index");
@@ -80,11 +80,13 @@ namespace JuCheap.Web.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> Edit(NewsInfoDto dto)
         {
             if (ModelState.IsValid)
             {
+                string content = Request.Form["editorValue"];
+                dto.NewsContent = Server.HtmlEncode(content);
                 var result = await _newService.Update(dto);
                 if (result)
                     return RedirectToAction("Index");

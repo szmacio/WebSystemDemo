@@ -80,11 +80,13 @@ namespace JuCheap.Web.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> Edit(ProductDto dto)
         {
             if (ModelState.IsValid)
             {
+                string content = Request.Form["editorValue"];
+                dto.Procontent = Server.HtmlEncode(content);
                 var result = await _productService.Update(dto);
                 if (result)
                     return RedirectToAction("Index");

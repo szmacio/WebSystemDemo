@@ -29,7 +29,7 @@ namespace JuCheap.Web.Controllers
         [IgnoreRightFilter]
         public async Task<JsonResult> GetListWithPager(PageFilter filters)
         {
-            var result = await _newService.Search(filters);
+            var result = await _newService.SearchType(filters);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -44,7 +44,7 @@ namespace JuCheap.Web.Controllers
         /// <returns></returns>
         public ActionResult Add()
         {
-            return View(new NewsInfoDto());
+            return View(new NewsTypeDto());
         }
         /// <summary>
         /// 添加
@@ -53,12 +53,11 @@ namespace JuCheap.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public async Task<ActionResult> Add(NewsInfoDto dto)
+        public async Task<ActionResult> Add(NewsTypeDto dto)
         {
             if (ModelState.IsValid)
             {
-                string content = Request.Form["editorValue"];
-                var result = await _newService.Add(dto);
+                var result = await _newService.AddType(dto);
                 if (result.IsNotBlank())
                     return RedirectToAction("Index");
             }
@@ -71,7 +70,7 @@ namespace JuCheap.Web.Controllers
         /// <returns></returns>
         public async Task<ActionResult> Edit(string id)
         {
-            var dto = await _newService.Find(id);
+            var dto = await _newService.FindType(id);
             return View(dto);
         }
         /// <summary>
@@ -81,11 +80,11 @@ namespace JuCheap.Web.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(NewsInfoDto dto)
+        public async Task<ActionResult> Edit(NewsTypeDto dto)
         {
             if (ModelState.IsValid)
             {
-                var result = await _newService.Update(dto);
+                var result = await _newService.UpdateType(dto);
                 if (result)
                     return RedirectToAction("Index");
             }

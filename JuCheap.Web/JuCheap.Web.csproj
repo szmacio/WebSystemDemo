@@ -1053,6 +1053,10 @@
     <Content Include="Views\Product\Delete.cshtml" />
     <Content Include="Views\ProductList\Add.cshtml" />
     <Content Include="Views\ProductList\Edit.cshtml" />
+    <Content Include="Views\New\Add.cshtml" />
+    <Content Include="Views\New\Edit.cshtml" />
+    <Content Include="Views\NewList\Add.cshtml" />
+    <Content Include="Views\NewList\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -18,27 +18,28 @@ namespace JuCheap.Interfaces
         /// <param name="dto">用户模型</param>
         /// <returns></returns>
         Task<string> Add(NewsInfoDto dto);
+        Task<string> AddType(NewsTypeDto dto);
         /// <summary>
         /// 分页搜索
         /// </summary>
         /// <param name="filters">查询过滤参数</param>
         /// <returns></returns>
+        Task<PagedResult<NewsTypeDto>> SearchType(PageFilter filters);
         Task<PagedResult<NewsInfoDto>> Search(PageFilter filters);
-
         /// <summary>
         /// 更新单页
         /// </summary>
         /// <param name="dto">用户模型</param>
         /// <returns></returns>
         Task<bool> Update(NewsInfoDto dto);
-
+        Task<bool> UpdateType(NewsTypeDto dto);
         /// <summary>
         /// 根据主键查询模型
         /// </summary>
         /// <param name="id">主键</param>
         /// <returns></returns>
         Task<NewsInfoDto> Find(string id);
-
+        Task<NewsTypeDto> FindType(string id);
         /// <summary>
         /// 批量删除
         /// </summary>

@@ -33,9 +33,18 @@ namespace JuCheap.Services.AppServices
             _mapper = mapper;
         }
 
-        public Task<string> Add(NewsInfoDto dto)
+        async Task<string> INewsService.AddType(NewsTypeDto dto)
         {
-            throw new NotImplementedException();
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var entity = _mapper.Map<NewsTypeDto, NewsTypeEntity>(dto);
+                entity.Create();
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                db.NewsTypeInfos.Add(entity);
+
+                await scope.SaveChangesAsync();
+                return entity.Id;
+            }
         }
 
         public Task<bool> Delete(IEnumerable<string> ids)
@@ -43,19 +52,107 @@ namespace JuCheap.Services.AppServices
             throw new NotImplementedException();
         }
 
-        public Task<NewsInfoDto> Find(string id)
+        async Task<NewsTypeDto> INewsService.FindType(string id)
         {
-            throw new NotImplementedException();
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var entity = await db.NewsTypeInfos.LoadAsync(id);
+                var dto = _mapper.Map<NewsTypeEntity, NewsTypeDto>(entity);
+                return dto;
+            }
         }
 
-        public Task<PagedResult<NewsInfoDto>> Search(PageFilter filters)
+        async Task<PagedResult<NewsTypeDto>> INewsService.SearchType(PageFilter filters)
         {
-            throw new NotImplementedException();
+            if (filters == null)
+                return new PagedResult<NewsTypeDto>(1, 0);
+
+            using (var scope = _dbContextScopeFactory.CreateReadOnly())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var query = db.NewsTypeInfos
+                    .WhereIf(filters.keywords.IsNotBlank(), x => x.NewsTypeTitle.Contains(filters.keywords));
+
+                return await query.OrderByCustom(filters.sidx, filters.sord)
+                    .Select(x => new NewsTypeDto
+                    {
+                        Id = x.Id,
+                        NewsTypeTitle = x.NewsTypeTitle,
+                        CreateDateTime = x.CreateDateTime,
+
+                    }).PagingAsync(filters.page, filters.rows);
+            }
         }
 
-        public Task<bool> Update(NewsInfoDto dto)
+        async Task<bool> INewsService.Update(NewsInfoDto dto)
         {
-            throw new NotImplementedException();
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var entity = await db.NewsInfos.LoadAsync(dto.Id);
+                entity.NewsTitle = dto.NewsTitle;
+                entity.NewsContent = dto.NewsContent;
+                await scope.SaveChangesAsync();
+                return true;
+            }
+        }
+        async Task<bool> INewsService.UpdateType(NewsTypeDto dto)
+        {
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var entity = await db.NewsTypeInfos.LoadAsync(dto.Id);
+                entity.NewsTypeTitle = dto.NewsTypeTitle;
+
+                await scope.SaveChangesAsync();
+                return true;
+            }
+        }
+        async Task<string> INewsService.Add(NewsInfoDto dto)
+        {
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var entity = _mapper.Map<NewsInfoDto, NewsInfoEntity>(dto);
+                entity.Create();
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                db.NewsInfos.Add(entity);
+                await scope.SaveChangesAsync();
+                return entity.Id;
+            }
+        }
+
+        async Task<PagedResult<NewsInfoDto>> INewsService.Search(PageFilter filters)
+        {
+            if (filters == null)
+                return new PagedResult<NewsInfoDto>(1, 0);
+
+            using (var scope = _dbContextScopeFactory.CreateReadOnly())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var query = db.NewsInfos
+                    .WhereIf(filters.keywords.IsNotBlank(), x => x.NewsTitle.Contains(filters.keywords));
+
+                return await query.OrderByCustom(filters.sidx, filters.sord)
+                    .Select(x => new NewsInfoDto
+                    {
+                        Id = x.Id,
+                        NewsTitle = x.NewsTitle,
+                        CreateDateTime = x.CreateDateTime,
+
+                    }).PagingAsync(filters.page, filters.rows);
+            }
+        }
+
+        async Task<NewsInfoDto> INewsService.Find(string id)
+        {
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var entity = await db.NewsInfos.LoadAsync(id);
+                var dto = _mapper.Map<NewsInfoEntity, NewsInfoDto>(entity);
+                return dto;
+            }
         }
     }
 }
