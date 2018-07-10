@@ -46,9 +46,17 @@ namespace JuCheap.Services.AppServices
                 return entity.Id;
             }
         }
-        public Task<string> Add(ProductDto dto)
+        async Task<string> IProductService.Add(ProductDto dto)
         {
-            throw new NotImplementedException();
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var entity = _mapper.Map<ProductDto, ProductEntity>(dto);
+                entity.Create();
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                db.Products.Add(entity);
+                await scope.SaveChangesAsync();
+                return entity.Id;
+            }
         }
 
         public Task<bool> Delete(IEnumerable<string> ids)
@@ -70,9 +78,36 @@ namespace JuCheap.Services.AppServices
                 return dto;
             }
         }
-        public Task<PagedResult<ProductDto>> Search(PageFilter filters)
+        async Task<ProductDto> IProductService.Find(string id)
         {
-            throw new NotImplementedException();
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var entity = await db.Products.LoadAsync(id);
+                var dto = _mapper.Map<ProductEntity, ProductDto>(entity);
+                return dto;
+            }
+        }
+        async Task<PagedResult<ProductDto>> IProductService.Search(PageFilter filters)
+        {
+            if (filters == null)
+                return new PagedResult<ProductDto>(1, 0);
+
+            using (var scope = _dbContextScopeFactory.CreateReadOnly())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var query = db.Products
+                    .WhereIf(filters.keywords.IsNotBlank(), x => x.ProName.Contains(filters.keywords));
+
+                return await query.OrderByCustom(filters.sidx, filters.sord)
+                    .Select(x => new ProductDto
+                    {
+                        Id = x.Id,
+                        ProName = x.ProName,
+                        CreateDateTime = x.CreateDateTime,
+
+                    }).PagingAsync(filters.page, filters.rows);
+            }
         }
         public async Task<PagedResult<ProductTypeDto>> SearchType(PageFilter filters)
         {
@@ -95,9 +130,17 @@ namespace JuCheap.Services.AppServices
                     }).PagingAsync(filters.page, filters.rows);
             }
         }
-        public Task<bool> Update(ProductDto dto)
+        async Task<bool> IProductService.Update(ProductDto dto)
         {
-            throw new NotImplementedException();
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var entity = await db.Products.LoadAsync(dto.Id);
+                entity.ProName = dto.ProName;
+                entity.Procontent = dto.Procontent;
+                await scope.SaveChangesAsync();
+                return true;
+            }
         }
 
         async Task<bool> IProductService.UpdateType(ProductTypeDto dto)

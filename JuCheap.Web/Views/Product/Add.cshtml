@@ -27,8 +27,22 @@
                         @Html.ValidationMessageFor(m => m.ProTypeTitle)
                     </div>
                 </div>
-             
-         
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.ProTypeTitle)：</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.ProTypeTitle, new { @class = "form-control", placeholder = "产品名称" })
+                        @Html.ValidationMessageFor(m => m.ProTypeTitle)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.ProTypeTitle)：</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.ProTypeTitle, new { @class = "form-control", placeholder = "分类名称" })
+                        @Html.ValidationMessageFor(m => m.ProTypeTitle)
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-8">
                         <button class="btn btn-info" type="submit" id="btnSave">保存</button>

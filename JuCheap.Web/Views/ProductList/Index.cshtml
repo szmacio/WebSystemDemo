@@ -79,13 +79,11 @@
             var config = {
                 title: '用户列表',
                 url: '@Url.Action("GetListWithPager")',
-                colNames: ['主键', '页面名称', '标题', '作者', '内容', '创建时间'],
+                colNames: ['主键', '名称',  '创建时间'],
                 colModel: [
                     { name: 'Id', index: 'Id', width: 60, key: true, hidden: true },
-                    { name: 'PageName', index: 'PageName', width: 60 },
-                    { name: 'Title', index: 'Title', width: 60 },
-                    { name: 'Author', index: 'Author', width: 100 },
-                    { name: 'Content', index: 'Content', width: 60 },
+                    { name: 'ProName', index: 'ProName', width: 60 },
+     
                     {
                         name: 'CreateDateTime',
                         index: 'CreateDateTime',

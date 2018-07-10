@@ -99,6 +99,8 @@ namespace JuCheap.Models
             set { _promonery = value; }
             get { return _promonery; }
         }
+        public string Id { get; set; }
+        public DateTime CreateDateTime { get; set; }
         #endregion Model
     }
 }

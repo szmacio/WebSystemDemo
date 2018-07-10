@@ -51,16 +51,16 @@ namespace JuCheap.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public async Task<ActionResult> Add(ProductDto dto)
         {
             if (ModelState.IsValid)
             {
                 string content = Request.Form["editorValue"];
+                dto.Procontent= Server.HtmlEncode(content);
                 var result = await _productService.Add(dto);
                 if (result.IsNotBlank())
-                    return RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
             return View(dto);
         }
