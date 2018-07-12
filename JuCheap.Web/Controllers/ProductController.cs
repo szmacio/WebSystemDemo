@@ -11,6 +11,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+
 
 namespace JuCheap.Web.Controllers
 {
@@ -32,11 +34,26 @@ namespace JuCheap.Web.Controllers
             var result = await _productService.SearchType(filters);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        public ActionResult Index()
+        [HttpPost]
+        public JsonResult GetProductType()
         {
-            return View();
+  
+            var result = GetListWithPager(null);
+            //其他代码省略
+            return Json(new SelectValues() { status = true, data = new JsonNetResult(result) }, JsonRequestBehavior.AllowGet);
+
         }
+
+        public class SelectValues
+        {
+            public bool status { set; get; }
+            public string data { set; get; }
+        }
+        //async Task<JsonResult>  GetProductType()
+        //{
+        //    var result = await _productService.SearchType();
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
         /// <summary>
         /// 添加

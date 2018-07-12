@@ -51,13 +51,12 @@ namespace JuCheap.Web.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public async Task<ActionResult> Add(MessageInfoDto dto)
         {
             if (ModelState.IsValid)
             {
-                string content = Request.Form["editorValue"];
+                
                 var result = await _messageInfoService.Add(dto);
                 if (result.IsNotBlank())
                     return RedirectToAction("Index");

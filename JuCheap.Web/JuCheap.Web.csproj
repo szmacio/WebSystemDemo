@@ -1057,6 +1057,8 @@
     <Content Include="Views\New\Edit.cshtml" />
     <Content Include="Views\NewList\Add.cshtml" />
     <Content Include="Views\NewList\Edit.cshtml" />
+    <Content Include="Views\MessageInfo\Add.cshtml" />
+    <Content Include="Views\MessageInfo\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

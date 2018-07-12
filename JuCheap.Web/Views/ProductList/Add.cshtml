@@ -21,6 +21,15 @@
             {
                 @Html.AntiForgeryToken()
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">产品类别</label>
+                    <div class="col-sm-8">
+                        <select id="GetProType" class="form-control m-b" name="account">
+                            <option value="-1">--请选择--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-sm-3 control-label">@Html.LabelFor(m => m.ProName)：</label>
                     <div class="col-sm-8">
                         @Html.TextBoxFor(m => m.ProName, new { @class = "form-control", placeholder = "分类名称" })
@@ -65,6 +74,8 @@
 <script src="~/Content/js/ueeditor/ueditor.config.js"></script>
 <script src="~/Content/js/ueeditor/ueditor.all.min.js"></script>
 <script src="~/Content/js/ueeditor/ang/zh-cn/zh-cn.js"></script>
+
+
 <script type="text/javascript">
 
     //实例化编辑器
@@ -77,5 +88,28 @@
         arr.push(UE.getEditor('editor').getContent());
         alert(arr.join("\n"));
     }
+   
 
 </script>
+@section scripts
+{
+    @Scripts.Render("~/content/js/list")
+    <script>
+
+        $.ajax({
+            type: "POST",
+            url: "/Product/GetProductType", //此次url改为真正需要的url
+            success: function (data) {
+                $("#GetProType").append(  //此处向select中循环绑定数据
+                    "<option value=" + '2' + ">" + '2' + "</option>");
+                alert(data.data);
+            },
+            error: function () {
+        
+            }
+        });
+        //$("#GetProType").append(  //此处向select中循环绑定数据
+        //    "<option value=" + '2' + ">" + '2' + "</option>");
+
+    </script>
+    }

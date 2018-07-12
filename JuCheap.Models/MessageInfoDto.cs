@@ -79,6 +79,10 @@ namespace JuCheap.Models
             set { _messcontent = value; }
             get { return _messcontent; }
         }
+
+        public string Id { get; set; }
+        public DateTime CreateDateTime { get; set; }
+
         #endregion Model
     }
 }

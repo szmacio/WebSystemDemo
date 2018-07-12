@@ -18,7 +18,7 @@ namespace JuCheap.Interfaces
 
         Task<PagedResult<ProductDto>> Search(PageFilter filters);
         Task<PagedResult<ProductTypeDto>> SearchType(PageFilter filters);
-
+ 
         Task<bool> Update(ProductDto dto);
         Task<bool> UpdateType(ProductTypeDto dto);
 
