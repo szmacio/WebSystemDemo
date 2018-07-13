@@ -16,9 +16,7 @@ namespace JuCheap.Models
         private string _imageurl;
         private int? _hitnum;
         private string _newscontent;
-        /// <summary>
-        /// 
-        /// </summary>
+        [Display(Name = "新闻标题")]
         public string NewsTitle
         {
             set { _newstitle = value; }
@@ -32,6 +30,7 @@ namespace JuCheap.Models
             set { _write = value; }
             get { return _write; }
         }
+        [Display(Name = "新闻类别")]
         /// <summary>
         /// 
         /// </summary>
@@ -48,6 +47,7 @@ namespace JuCheap.Models
             set { _fatime = value; }
             get { return _fatime; }
         }
+        [Display(Name = "新闻图片")]
         /// <summary>
         /// 
         /// </summary>
@@ -64,6 +64,7 @@ namespace JuCheap.Models
             set { _hitnum = value; }
             get { return _hitnum; }
         }
+        [Display(Name = "新闻内容")]
         /// <summary>
         /// 
         /// </summary>

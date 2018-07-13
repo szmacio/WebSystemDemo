@@ -8,6 +8,7 @@ using JuCheap.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -27,6 +28,10 @@ namespace JuCheap.Web.Controllers
             _productService = productService;
             _mapper = mapper;
         }
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         [IgnoreRightFilter]
         public async Task<JsonResult> GetListWithPager(PageFilter filters)
@@ -34,26 +39,17 @@ namespace JuCheap.Web.Controllers
             var result = await _productService.SearchType(filters);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        [HttpPost]
-        public JsonResult GetProductType()
+        [IgnoreRightFilter]
+        public async Task<JsonResult> GetProductType()
         {
   
-            var result = GetListWithPager(null);
-            //其他代码省略
-            return Json(new SelectValues() { status = true, data = new JsonNetResult(result) }, JsonRequestBehavior.AllowGet);
+            var result = await _productService.GetType();
+            var jsonResult = Json(result);
+          //  DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(List < ProductTypeDto >));
+           // return Json(new SelectValues() { status = true, data = Json(result,null) }, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
 
         }
-
-        public class SelectValues
-        {
-            public bool status { set; get; }
-            public string data { set; get; }
-        }
-        //async Task<JsonResult>  GetProductType()
-        //{
-        //    var result = await _productService.SearchType();
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
 
         /// <summary>
         /// 添加

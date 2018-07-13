@@ -10,6 +10,7 @@ namespace JuCheap.Models
     {
         public DateTime CreateDateTime { get; set; }
         public string Id { get; set; }
+        [Display(Name = "新闻类别")]
         public string NewsTypeTitle { get; set; }
 
     }

@@ -19,6 +19,7 @@ namespace JuCheap.Models
         private int? _hitnum;
         private string _procontent;
         private string _promonery;
+        [Display(Name = "产品名称")]
         /// <summary>
         /// 
         /// </summary>
@@ -35,6 +36,7 @@ namespace JuCheap.Models
             set { _protypeid = value; }
             get { return _protypeid; }
         }
+        [Display(Name = "产品图片")]
         /// <summary>
         /// 
         /// </summary>
@@ -83,6 +85,7 @@ namespace JuCheap.Models
             set { _hitnum = value; }
             get { return _hitnum; }
         }
+        [Display(Name = "产品介绍")]
         /// <summary>
         /// 
         /// </summary>
@@ -91,6 +94,7 @@ namespace JuCheap.Models
             set { _procontent = value; }
             get { return _procontent; }
         }
+        [Display(Name = "产品价格")]
         /// <summary>
         /// 
         /// </summary>

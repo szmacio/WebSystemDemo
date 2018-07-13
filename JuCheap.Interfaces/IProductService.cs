@@ -24,7 +24,7 @@ namespace JuCheap.Interfaces
 
         Task<ProductDto> Find(string id);
         Task<ProductTypeDto> FindType(string id);
-
+        Task<List<ProductTypeDto>> GetType();
         Task<bool> Delete(IEnumerable<string> ids);
 
 

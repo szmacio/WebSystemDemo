@@ -15,22 +15,19 @@ namespace JuCheap.Models
         private string _linkphoto;
         private string _email;
         private string _messcontent;
-        /// <summary>
-        /// 
-        /// </summary>
+        [Display(Name = "留言内容")]
         public string MessTitle
         {
             set { _messtitle = value; }
             get { return _messtitle; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
+        [Display(Name = "称谓")]
         public string Username
         {
             set { _username = value; }
             get { return _username; }
         }
+        [Display(Name = "性别")]
         /// <summary>
         /// 
         /// </summary>
@@ -39,17 +36,13 @@ namespace JuCheap.Models
             set { _sex = value; }
             get { return _sex; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
+   
         public DateTime? DateTime
         {
             set { _datetime = value; }
             get { return _datetime; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
+        [Display(Name = "地址")]
         public string Address
         {
             set { _address = value; }
@@ -71,9 +64,7 @@ namespace JuCheap.Models
             set { _email = value; }
             get { return _email; }
         }
-        /// <summary>
-        /// 
-        /// </summary>
+        [Display(Name = "留言内容")]
         public string Messcontent
         {
             set { _messcontent = value; }

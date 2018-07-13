@@ -130,6 +130,18 @@ namespace JuCheap.Services.AppServices
                     }).PagingAsync(filters.page, filters.rows);
             }
         }
+
+   
+        async Task <List<ProductTypeDto>> IProductService.GetType()
+        {
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var list = await db.ProductTypes.ToListAsync();
+                var result = _mapper.Map<List<ProductTypeEntity>, List<ProductTypeDto>>(list);
+                return result;
+            }
+        }
         async Task<bool> IProductService.Update(ProductDto dto)
         {
             using (var scope = _dbContextScopeFactory.Create())
