@@ -19,7 +19,7 @@ namespace JuCheap.Data.Entity
 
         #region Model
         private string _proname;
-        private int? _protypeid;
+        private string _protypeid;
         private string _imageurl;
         private int? _proxingid;
         private DateTime? _prochutime;
@@ -39,7 +39,7 @@ namespace JuCheap.Data.Entity
         /// <summary>
         /// 
         /// </summary>
-        public int? ProTypeID
+        public string ProTypeID
         {
             set { _protypeid = value; }
             get { return _protypeid; }
@@ -114,5 +114,6 @@ namespace JuCheap.Data.Entity
         /// 所属角色
         /// </summary>
         public IList<RoleEntity> Roles { get; set; }
+        public virtual ProductTypeEntity productType { get; set; }
     }
 }

@@ -88,6 +88,8 @@ namespace JuCheap.Services.AppServices
                 return dto;
             }
         }
+
+      
         async Task<PagedResult<ProductDto>> IProductService.Search(PageFilter filters)
         {
             if (filters == null)
@@ -95,6 +97,8 @@ namespace JuCheap.Services.AppServices
 
             using (var scope = _dbContextScopeFactory.CreateReadOnly())
             {
+
+        
                 var db = scope.DbContexts.Get<JuCheapContext>();
                 var query = db.Products
                     .WhereIf(filters.keywords.IsNotBlank(), x => x.ProName.Contains(filters.keywords));
@@ -104,6 +108,8 @@ namespace JuCheap.Services.AppServices
                     {
                         Id = x.Id,
                         ProName = x.ProName,
+                        ProTypeID = x.productType.ProTypeTitle,
+                        ImageURL = x.ImageURL,
                         CreateDateTime = x.CreateDateTime,
 
                     }).PagingAsync(filters.page, filters.rows);
@@ -142,6 +148,17 @@ namespace JuCheap.Services.AppServices
                 return result;
             }
         }
+
+        async Task<List<ProductDto>> IProductService.GetAllProducts()
+        {
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var list = await db.Products.ToListAsync();
+                var result = _mapper.Map<List<ProductEntity>, List<ProductDto>>(list);
+                return result;
+            }
+        }
         async Task<bool> IProductService.Update(ProductDto dto)
         {
             using (var scope = _dbContextScopeFactory.Create())
@@ -150,6 +167,8 @@ namespace JuCheap.Services.AppServices
                 var entity = await db.Products.LoadAsync(dto.Id);
                 entity.ProName = dto.ProName;
                 entity.Procontent = dto.Procontent;
+                entity.ImageURL = dto.ImageURL;
+                entity.ProMonery = dto.ProMonery;
                 await scope.SaveChangesAsync();
                 return true;
             }

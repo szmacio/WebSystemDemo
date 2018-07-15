@@ -35,10 +35,11 @@ namespace JuCheap.Interfaces
         Task<bool> UpdateType(NewsTypeDto dto);
         /// <summary>
         /// 根据主键查询模型
-        /// </summary>
+        /// </summary>FindallNews
         /// <param name="id">主键</param>
         /// <returns></returns>
         Task<NewsInfoDto> Find(string id);
+        Task<List<NewsInfoDto>> FindallNews();
         Task<NewsTypeDto> FindType(string id);
         /// <summary>
         /// 批量删除
@@ -46,6 +47,7 @@ namespace JuCheap.Interfaces
         /// <param name="ids">主键ID集合</param>
         /// <returns></returns>
         Task<bool> Delete(IEnumerable<string> ids);
+        Task<List<NewsTypeDto>> GetType();
 
 
     }

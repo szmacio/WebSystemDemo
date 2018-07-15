@@ -265,6 +265,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\WebController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -415,6 +416,7 @@
     <Content Include="Content\fonts\roboto\Roboto-Thin-webfont.svg" />
     <Content Include="Content\fonts\roboto\Roboto-ThinItalic-webfont.svg" />
     <Content Include="Content\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="Content\images\01.jpg" />
     <Content Include="Content\images\calendar-arrow.png" />
     <Content Include="Content\images\clear.png" />
     <Content Include="Content\images\close-white.png" />
@@ -530,6 +532,20 @@
     <Content Include="Content\images\prettyphoto\sprite_prev.png" />
     <Content Include="Content\images\prettyphoto\sprite_x.png" />
     <Content Include="Content\images\prettyphoto\sprite_y.png" />
+    <Content Include="Content\images\Prouct\dj\1.jpg" />
+    <Content Include="Content\images\Prouct\dj\2.jpg" />
+    <Content Include="Content\images\Prouct\dj\3.jpg" />
+    <Content Include="Content\images\Prouct\dj\4.jpg" />
+    <Content Include="Content\images\Prouct\dj\5.jpg" />
+    <Content Include="Content\images\Prouct\dj\6.jpg" />
+    <Content Include="Content\images\Prouct\dj\7.jpg" />
+    <Content Include="Content\images\Prouct\dj\8.jpg" />
+    <Content Include="Content\images\Prouct\rl\1.jpg" />
+    <Content Include="Content\images\Prouct\rl\2.jpg" />
+    <Content Include="Content\images\Prouct\rl\3.jpg" />
+    <Content Include="Content\images\Prouct\rl\4.jpg" />
+    <Content Include="Content\images\Prouct\rl\5.jpg" />
+    <Content Include="Content\images\Prouct\rl\6.jpg" />
     <Content Include="Content\images\select2-spinner.gif" />
     <Content Include="Content\images\select2.png" />
     <Content Include="Content\images\select2x2.png" />
@@ -863,6 +879,24 @@
     <Content Include="Content\js\vue.min.js" />
     <Content Include="Content\js\wysihtml5-0.3.0.min.js" />
     <Content Include="Content\css\login.css" />
+    <Content Include="Content\webjs\hd.js" />
+    <Content Include="Content\webjs\index_solid.js" />
+    <Content Include="Content\webjs\jquery-1.7.1.min.js" />
+    <Content Include="Content\webjs\jquery-1.8.3.min.js" />
+    <Content Include="Content\webjs\jquery.min.js" />
+    <Content Include="Content\webjs\jquery.tools.min.js" />
+    <Content Include="Content\webjs\koala.min.1.5.js" />
+    <Content Include="Content\webjs\lanrenzhijia.js" />
+    <Content Include="Content\webjs\list1.js" />
+    <Content Include="Content\webjs\lrtk.js" />
+    <Content Include="Content\webjs\mzp-packed.js" />
+    <Content Include="Content\webjs\nav.js" />
+    <Content Include="Content\webjs\sbhg.js" />
+    <Content Include="Content\webjs\sbhg1.js" />
+    <Content Include="Content\webjs\sbhg2.js" />
+    <Content Include="Content\webjs\sbhg3.js" />
+    <Content Include="Content\webjs\slides-1.1.1-min.js" />
+    <Content Include="Content\webjs\terminator2.2.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
@@ -963,6 +997,7 @@
     <Content Include="Content\js\ueeditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Content\js\ueeditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Content\js\ueeditor\third-party\video-js\font\vjs.woff" />
+    <None Include="Properties\PublishProfiles\aa.pubxml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\html5shiv.js" />
@@ -1059,6 +1094,16 @@
     <Content Include="Views\NewList\Edit.cshtml" />
     <Content Include="Views\MessageInfo\Add.cshtml" />
     <Content Include="Views\MessageInfo\Edit.cshtml" />
+    <Content Include="Views\Web\Index.cshtml" />
+    <Content Include="Views\Shared\_WebLayout.cshtml" />
+    <Content Include="Views\Web\About.cshtml" />
+    <Content Include="Views\Web\Contactus.cshtml" />
+    <Content Include="Views\Web\News.cshtml" />
+    <Content Include="Views\Web\Products.cshtml" />
+    <Content Include="Views\Web\Down.cshtml" />
+    <Content Include="Views\Web\Order.cshtml" />
+    <Content Include="Views\Web\NewDetail.cshtml" />
+    <Content Include="Views\Web\ProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1066,7 +1111,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Configs\Scripts.config" />
-    <Content Include="Configs\Styles.config" />
+    <Content Include="Configs\Styles.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\fontawesome-webfont93e3.eot" />

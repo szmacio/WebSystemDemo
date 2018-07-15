@@ -25,7 +25,17 @@ namespace JuCheap.Web.Controllers
             _newService = newService;
             _mapper = mapper;
         }
+        [IgnoreRightFilter]
+        public async Task<JsonResult> GetNewType()
+        {
 
+            var result = await _newService.GetType();
+            var jsonResult = Json(result);
+            //  DataContractJsonSerializer js = new DataContractJsonSerializer(typeof(List < ProductTypeDto >));
+            // return Json(new SelectValues() { status = true, data = Json(result,null) }, JsonRequestBehavior.AllowGet);
+            return Json(result, JsonRequestBehavior.AllowGet);
+
+        }
         [IgnoreRightFilter]
         public async Task<JsonResult> GetListWithPager(PageFilter filters)
         {
@@ -57,6 +67,7 @@ namespace JuCheap.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+               
                 var result = await _newService.AddType(dto);
                 if (result.IsNotBlank())
                     return RedirectToAction("Index");

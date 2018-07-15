@@ -79,9 +79,10 @@
             var config = {
                 title: '用户列表',
                 url: '@Url.Action("GetListWithPager")',
-                colNames: ['主键', '名称',  '创建时间'],
+                colNames: ['主键', '类别', '名称',  '创建时间'],
                 colModel: [
                     { name: 'Id', index: 'Id', width: 60, key: true, hidden: true },
+                      { name: 'NewsTypeID', index: 'NewsTypeID', width: 60 },
                     { name: 'NewsTitle', index: 'NewsTitle', width: 60 },
 
                     {

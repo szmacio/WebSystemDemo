@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace JuCheap.Models
@@ -12,6 +13,7 @@ namespace JuCheap.Models
         public string Id { get; set; }
         [Display(Name = "新闻类别")]
         public string NewsTypeTitle { get; set; }
+        public IList<NewsInfoDto> newsInfos { get; set; }
 
     }
 }

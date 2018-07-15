@@ -10,7 +10,7 @@ namespace JuCheap.Models
 
         #region Model
         private string _proname;
-        private int? _protypeid;
+        private string _protypeid;
         private string _imageurl;
         private int? _proxingid;
         private DateTime? _prochutime;
@@ -31,7 +31,7 @@ namespace JuCheap.Models
         /// <summary>
         /// 
         /// </summary>
-        public int? ProTypeID
+        public string ProTypeID
         {
             set { _protypeid = value; }
             get { return _protypeid; }
@@ -94,7 +94,7 @@ namespace JuCheap.Models
             set { _procontent = value; }
             get { return _procontent; }
         }
-        [Display(Name = "产品价格")]
+        [Display(Name = "产品描述")]
         /// <summary>
         /// 
         /// </summary>
@@ -106,5 +106,7 @@ namespace JuCheap.Models
         public string Id { get; set; }
         public DateTime CreateDateTime { get; set; }
         #endregion Model
+        public virtual ProductTypeDto productType { get; set; }
+      
     }
 }

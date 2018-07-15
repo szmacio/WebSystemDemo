@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace JuCheap.Models
@@ -25,5 +26,6 @@ namespace JuCheap.Models
             get { return _protypetitle; }
         }
         #endregion Model
+        public IList<ProductDto> Products { get; set; }
     }
 }

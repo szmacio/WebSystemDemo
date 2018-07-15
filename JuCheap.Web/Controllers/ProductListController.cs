@@ -56,8 +56,11 @@ namespace JuCheap.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                string productTtype = Request.Form["account"];
                 string content = Request.Form["editorValue"];
-                dto.Procontent= Server.HtmlEncode(content);
+                dto.Procontent= content;
+                dto.ProTypeID = productTtype;
                 var result = await _productService.Add(dto);
                 if (result.IsNotBlank())
                 return RedirectToAction("Index");
@@ -86,7 +89,7 @@ namespace JuCheap.Web.Controllers
             if (ModelState.IsValid)
             {
                 string content = Request.Form["editorValue"];
-                dto.Procontent = Server.HtmlEncode(content);
+                dto.Procontent = content;
                 var result = await _productService.Update(dto);
                 if (result)
                     return RedirectToAction("Index");

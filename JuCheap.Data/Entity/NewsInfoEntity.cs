@@ -20,7 +20,7 @@ namespace JuCheap.Data.Entity
         #region Model
         private string _newstitle;
         private string _write;
-        private int? _newstypeid;
+        private string _newstypeid;
         private DateTime? _fatime;
         private string _imageurl;
         private int? _hitnum;
@@ -44,7 +44,7 @@ namespace JuCheap.Data.Entity
         /// <summary>
         /// 
         /// </summary>
-        public int? NewsTypeID
+        public string NewsTypeID
         {
             set { _newstypeid = value; }
             get { return _newstypeid; }
@@ -84,7 +84,8 @@ namespace JuCheap.Data.Entity
         #endregion Model
         /// <summary>
         /// 所属角色
-        /// </summary>
+        /// </summary>newsType
         public IList<RoleEntity> Roles { get; set; }
+        public virtual NewsTypeEntity newsType { get; set; }
     }
 }

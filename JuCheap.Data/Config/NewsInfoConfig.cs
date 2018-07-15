@@ -15,7 +15,8 @@ namespace JuCheap.Data.Config
         {
             ToTable("NewsInfo");
             HasKey(item => item.Id);
-   
+            HasOptional(x => x.newsType).WithMany(x => x.newsInfos).HasForeignKey(x => x.NewsTypeID);
+
         }
     }
 }

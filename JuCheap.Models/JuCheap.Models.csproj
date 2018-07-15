@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Filters\PageFilter.cs" />
+    <Compile Include="IndexDto.cs" />
     <Compile Include="ProxyIpDto.cs" />
     <Compile Include="AreaDto.cs" />
     <Compile Include="DepartmentDto.cs" />

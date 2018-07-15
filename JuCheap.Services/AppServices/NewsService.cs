@@ -93,6 +93,7 @@ namespace JuCheap.Services.AppServices
                 var entity = await db.NewsInfos.LoadAsync(dto.Id);
                 entity.NewsTitle = dto.NewsTitle;
                 entity.NewsContent = dto.NewsContent;
+                entity.Write = dto.Write;
                 await scope.SaveChangesAsync();
                 return true;
             }
@@ -137,6 +138,7 @@ namespace JuCheap.Services.AppServices
                     .Select(x => new NewsInfoDto
                     {
                         Id = x.Id,
+                        NewsTypeID = x.newsType.NewsTypeTitle,
                         NewsTitle = x.NewsTitle,
                         CreateDateTime = x.CreateDateTime,
 
@@ -152,6 +154,26 @@ namespace JuCheap.Services.AppServices
                 var entity = await db.NewsInfos.LoadAsync(id);
                 var dto = _mapper.Map<NewsInfoEntity, NewsInfoDto>(entity);
                 return dto;
+            }
+        }
+        async Task<List<NewsInfoDto>>INewsService.FindallNews()
+        {
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var entity = await db.NewsInfos.ToListAsync();
+                var dto = _mapper.Map<List<NewsInfoEntity>, List<NewsInfoDto>>(entity);
+                return dto;
+            }
+        }
+        async  Task<List<NewsTypeDto>> INewsService.GetType()
+        {
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var list = await db.NewsTypeInfos.ToListAsync();
+                var result = _mapper.Map<List<NewsTypeEntity>, List<NewsTypeDto>>(list);
+                return result;
             }
         }
     }

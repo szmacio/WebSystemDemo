@@ -30,18 +30,24 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.ProMonery)：</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.ProMonery, new { @class = "form-control", placeholder = "描述" })
+                        @Html.ValidationMessageFor(m => m.ProMonery)
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label">@Html.LabelFor(m => m.ProName)：</label>
                     <div class="col-sm-8">
                         @Html.TextBoxFor(m => m.ProName, new { @class = "form-control", placeholder = "名称" })
                         @Html.ValidationMessageFor(m => m.ProName)
                     </div>
                 </div>
-                <div  id="file-pretty">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">@Html.LabelFor(m => m.ImageURL)：</label>
-                        <div class="col-sm-8">
-                            <input type="file" class="form-control">
-                        </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.ImageURL)：</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.ImageURL, new { @class = "form-control", placeholder = "图片" })
+                        @Html.ValidationMessageFor(m => m.ImageURL)
                     </div>
                 </div>
                     <div class="form-group">
@@ -121,68 +127,5 @@
         //$("#GetProType").append(  //此处向select中循环绑定数据
         //    "<option value=" + '2' + ">" + '2' + "</option>");
 
-    </script>
-
-     <script type="text/javascript">
-
-        $(function () {
-            var button = $('#btnUp'), interval;
-
-            var ajaxUpload = new AjaxUpload(button, {
-                //action: 'upload-test.php',文件上传服务器端执行的地址
-                action: 'AjaxuploadHandler.ashx',
-                name: 'myfile',
-                onSubmit: function (file, ext) {
-                    if (!(ext && /^(jpg|jpeg|JPG|JPEG)$/.test(ext))) 
-                    {
-                        alert('图片格式不正确,请选择 jpg 格式的文件!', '系统提示');
-                        return false;
-                    }
-
-                    // change button text, when user selects file
-                    button.text('上传中');
-
-                    // If you want to allow uploading only 1 file at time,
-                    // you can disable upload button
-                    this.disable();
-
-                    // Uploding -> Uploading. -> Uploading...
-                    interval = window.setInterval(function () {
-                        var text = button.text();
-                        if (text.length < 10) {
-                            button.text(text + '|');
-                        } else {
-                            button.text('上传中');
-                        }
-                    }, 200);
-                    return true;
-                },
-                onComplete: function (file, response) {
-
-                    //file 本地文件名称，response 服务器端传回的信息
-                   button.text('上传图片(只允许上传JPG格式的图片,大小不得大于150K)');
-
-                    window.clearInterval(interval);
-
-                    // enable upload button
-                    this.enable();
-                  
-                   
-                    var k = response.replace("<pre>", "").replace("</pre>", "");
-
-                    if (k === '-1') {
-                        alert('您上传的文件太大啦!请不要超过150K');
-                    }
-                    else {
-                        //  alert("服务器端传回的串：" + k);
-                        //alert("本地文件名称：" + file);
-
-                        k = k.substring(k.lastIndexOf('>')+1, k.length);
-                        $("#txtFileName").val(k);
-                        $("<img  width='50' height='50' />").appendTo($('#imglist')).attr("src", k);
-                    }
-                }
-            });
-        });
     </script>
     }

@@ -32,5 +32,6 @@ namespace JuCheap.Data.Entity
         /// 所属角色
         /// </summary>
         public IList<RoleEntity> Roles { get; set; }
+        public IList<NewsInfoEntity> newsInfos { get; set; }
     }
 }

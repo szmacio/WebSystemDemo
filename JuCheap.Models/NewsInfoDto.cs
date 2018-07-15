@@ -11,7 +11,7 @@ namespace JuCheap.Models
         #region Model
         private string _newstitle;
         private string _write;
-        private int? _newstypeid;
+        private string _newstypeid;
         private DateTime? _fatime;
         private string _imageurl;
         private int? _hitnum;
@@ -22,6 +22,7 @@ namespace JuCheap.Models
             set { _newstitle = value; }
             get { return _newstitle; }
         }
+        [Display(Name = "新闻副标题")]
         /// <summary>
         /// 
         /// </summary>
@@ -34,7 +35,7 @@ namespace JuCheap.Models
         /// <summary>
         /// 
         /// </summary>
-        public int? NewsTypeID
+        public string NewsTypeID
         {
             set { _newstypeid = value; }
             get { return _newstypeid; }
@@ -77,6 +78,9 @@ namespace JuCheap.Models
         public string Id { get; set; }
         public DateTime CreateDateTime { get; set; }
         #endregion Model
+        public virtual NewsTypeDto newsType { get; set; }
+        
+    
 
     }
 }

@@ -21,13 +21,25 @@
             {
                 @Html.AntiForgeryToken()
                 <div class="form-group">
+                    <label class="col-sm-3 control-label">新闻类别</label>
+                    <div class="col-sm-8">
+                        <select id="GetNewType" class="form-control m-b" name="account"></select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-3 control-label">@Html.LabelFor(m => m.NewsTitle)：</label>
                     <div class="col-sm-8">
                         @Html.TextBoxFor(m => m.NewsTitle, new { @class = "form-control", placeholder = "标题" })
                         @Html.ValidationMessageFor(m => m.NewsTitle)
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">@Html.LabelFor(m => m.Write)：</label>
+                    <div class="col-sm-8">
+                        @Html.TextBoxFor(m => m.Write, new { @class = "form-control", placeholder = "副标题" })
+                        @Html.ValidationMessageFor(m => m.Write)
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-sm-3 control-label">@Html.LabelFor(m => m.NewsContent)：</label>
                     <div class="col-sm-8">
@@ -79,3 +91,30 @@
     }
 
     </script>
+    @section scripts
+{
+        @Scripts.Render("~/content/js/list")
+        <script>
+
+        $.ajax({
+            type: "POST",
+            url: "/New/GetNewType", //此次url改为真正需要的url
+            success: function (data) {
+
+                for (x in data) {
+                    $("#GetNewType").append(  //此处向select中循环绑定数据
+                        "<option value=" + data[x].Id + ">" + data[x].NewsTypeTitle + "</option>");
+                }
+            },
+            error: function () {
+
+            }
+        });
+
+        //$("#GetProType").append(  //此处向select中循环绑定数据
+        //    "<option value=" + '2' + ">" + '2' + "</option>");
+
+        </script>
+
+
+    }
