@@ -47,8 +47,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -148,16 +148,24 @@
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.3.0\lib\net45\SimpleInjector.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SimpleInjector.Extensions.ExecutionContextScoping, Version=4.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
@@ -193,6 +201,10 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\portable-net40+sl4+win8+wp8\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -262,6 +274,14 @@
     <Compile Include="App_Start\SiteExceptionAttribute.cs" />
     <Compile Include="App_Start\Startup.Hangfire.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Content\js\ueeditor\net\App_Code\Config.cs" />
+    <Compile Include="Content\js\ueeditor\net\App_Code\ConfigHandler.cs" />
+    <Compile Include="Content\js\ueeditor\net\App_Code\CrawlerHandler.cs" />
+    <Compile Include="Content\js\ueeditor\net\App_Code\Handler.cs" />
+    <Compile Include="Content\js\ueeditor\net\App_Code\ListFileHandler.cs" />
+    <Compile Include="Content\js\ueeditor\net\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="Content\js\ueeditor\net\App_Code\PathFormater.cs" />
+    <Compile Include="Content\js\ueeditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\AreaController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
@@ -554,7 +574,6 @@
     <Content Include="Content\images\sort_both.png" />
     <Content Include="Content\images\sort_desc.png" />
     <Content Include="Content\images\sort_desc_disabled.png" />
-    <Content Include="Content\images\spritemap%402x.png" />
     <Content Include="Content\images\spritemap.png" />
     <Content Include="Content\images\themeforest.png" />
     <Content Include="Content\images\uploadfile.png" />
@@ -771,6 +790,7 @@
     <Content Include="Content\js\ueeditor\lang\zh-cn\images\music.png" />
     <Content Include="Content\js\ueeditor\lang\zh-cn\images\upload.png" />
     <Content Include="Content\js\ueeditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="Content\js\ueeditor\net\net.sln" />
     <Content Include="Content\js\ueeditor\themes\default\css\ueditor.css" />
     <Content Include="Content\js\ueeditor\themes\default\css\ueditor.min.css" />
     <Content Include="Content\js\ueeditor\themes\default\dialogbase.css" />
@@ -879,6 +899,7 @@
     <Content Include="Content\js\vue.min.js" />
     <Content Include="Content\js\wysihtml5-0.3.0.min.js" />
     <Content Include="Content\css\login.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="Content\webjs\hd.js" />
     <Content Include="Content\webjs\index_solid.js" />
     <Content Include="Content\webjs\jquery-1.7.1.min.js" />
@@ -997,6 +1018,10 @@
     <Content Include="Content\js\ueeditor\third-party\video-js\font\vjs.eot" />
     <Content Include="Content\js\ueeditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="Content\js\ueeditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="Content\js\ueeditor\net\config.json" />
+    <Content Include="Content\js\ueeditor\net\controller.ashx" />
+    <Content Include="Content\js\ueeditor\net\README.md" />
+    <Content Include="Content\js\ueeditor\net\Web.config" />
     <None Include="Properties\PublishProfiles\aa.pubxml" />
     <None Include="Properties\PublishProfiles\publish.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -1046,7 +1071,9 @@
     <Content Include="Views\User\Authen.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\User\ResetPwd.cshtml" />
     <Content Include="Views\Home\Tips.cshtml" />
@@ -1104,6 +1131,7 @@
     <Content Include="Views\Web\Order.cshtml" />
     <Content Include="Views\Web\NewDetail.cshtml" />
     <Content Include="Views\Web\ProductDetail.cshtml" />
+    <Content Include="Views\Web\BusyAir.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
