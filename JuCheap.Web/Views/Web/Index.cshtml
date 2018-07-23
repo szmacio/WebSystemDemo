@@ -1,0 +1,241 @@
+﻿@model JuCheap.Models.IndexDto
+@{
+    ViewBag.Title = "首页";
+    Layout = "~/Views/Shared/_WebLayout.cshtml"; ;
+}
+
+<div class="banner">
+
+
+    <div class="slide banner" data-slide='{"action":"click","fn":"banner_ext","time":"8000"}'>
+        <div class="ban_c album"><a href="#"><img src="../content/images/20140225171729652.jpg" /></a></div>
+        <div class="ban_c album"><a href="#"><img src="../content/images/20140113173751727.jpg" /></a></div>
+
+
+    </div>
+    <div class="wrap bann_ext">
+        <ul class="l frontCover"></ul>
+    </div>
+    <script src="../content/webjs/jquery.min.js"></script>
+    <script src="../content/webjs/lanrenzhijia.js"></script>
+    <!-- 代码部分end -->
+</div>
+<div class="m1">
+    <div class="m1_l">
+        <script type="text/javascript" src="../content/webjs/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="../content/webjs/koala.min.1.5.js"></script>
+        <div id="fsD1" class="focus">
+            <div id="D1pic1" class="fPic">
+                <div class="fcon" style="display: none;">
+                    <a target="_blank" href="#"><img src="../content/images/gs01.png" style="opacity: 1; "></a>
+
+                </div>
+
+                <div class="fcon" style="display: none;">
+                    <a target="_blank" href="#"><img src="../content/images/gs02.png" style="opacity: 1; "></a>
+
+                </div>
+
+
+            </div>
+            <div class="fbg">
+                <div class="D1fBt" id="D1fBt">
+                    <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>1</i></a>
+                    <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>2</i></a>
+                    <a href="javascript:void(0)" hidefocus="true" target="_self" class="current"><i>3</i></a>
+                    <a href="javascript:void(0)" hidefocus="true" target="_self" class=""><i>4</i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <script type="text/javascript">
+            Qfast.add('widgets', { path: "../content/webjs/terminator2.2.min.js", type: "js", requires: ['fx'] });
+            Qfast(false, 'widgets', function () {
+                K.tabs({
+                    id: 'fsD1',   //焦点图包裹id
+                    conId: "D1pic1",  //** 大图域包裹id
+                    tabId: "D1fBt",
+                    tabTn: "a",
+                    conCn: '.fcon', //** 大图域配置class
+                    auto: 1,   //自动播放 1或0
+                    effect: 'fade',   //效果配置
+                    eType: 'click', //** 鼠标事件
+                    pageBt: true,//是否有按钮切换页码
+                    bns: ['.prev', '.next'],//** 前后按钮配置class
+                    interval: 3000  //** 停顿时间
+                })
+            })
+        </script>
+    </div>
+    <div class="m1_r">
+        <p class="m1_rt">
+            深圳市龙鑫机电设备工程有限公司自成立以来，一直专注于经营舒适性中央空调工程、多联机工程、空气净化工程、节能蓄冰空调工程、环保空调工程、机电设备安装工程，是集工程设计、咨询、安装、设备供货、售后维护为一体的老牌专业化空调工程公司。
+        </p>
+        <ul>
+            <li><a href="#" style="color:#800000">公司经营范围如下：</a></li>
+            <li><a href="#">■日本大金中央空调深圳区域代理商及售后服务商；</a></li>
+            <li><a href="#">■美国麦克维尔中央空调及商用空调系列囤货商及售后服务商；</a></li>
+            <li><a href="#">■广东美的中央空调深圳区域代理商及售后服务商；。</a></li>
+
+
+        </ul>
+
+    </div>
+
+</div>
+<div class="m2">
+    <div class="m2_n">
+        <div class="m2_nt" style="color:#00990d">
+            品牌产品
+        </div>
+        <div class="m2_nb">
+
+            <div class="lanrenzhijia">
+                <div class="tab">
+                    @{int num = 1;}
+                    @foreach (var tt in Model.productTypes)
+                    {
+
+                        if (num == 1)
+                        {
+                            <a href="javascript:;" class="on">@tt.ProTypeTitle</a>
+                            num++;
+                            continue;
+
+                        }
+                        <a href="javascript:;">@tt.ProTypeTitle</a>
+                        num++;
+                    }
+                </div>
+                <div class="content">
+                    <ul>
+                        <li style="display:block;">
+                            <div class="mlt">
+                                @foreach (var tt in Model.products.Where(u => u.productType.ProTypeTitle == "大金"))
+                                {
+                                    <div class="mlt_n">
+                                        <a href="@Url.Action("ProductDetail",new { ID = tt.Id })"><img src="../content/images/@tt.ImageURL" width="220" height="170" /></a><p><a href="#">@tt.ProName</a></p>
+                                    </div>
+                                }
+
+                            </div>
+                        </li>
+                        <li>
+                            <div class="mlt">
+                                @foreach (var tt in Model.products.Where(u => u.productType.ProTypeTitle == "日立"))
+                                {
+                                    <div class="mlt_n">
+                                        <a href="@Url.Action("ProductDetail",new { ID = tt.Id })"><img src="../content/images/@tt.ImageURL" width="220" height="170" /></a><p><a href="#">@tt.ProName</a></p>
+                                    </div>
+                                }
+
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="mlt">
+                                @foreach (var tt in Model.products.Where(u => u.productType.ProTypeTitle == "格力"))
+                                {
+                                    <div class="mlt_n">
+                                        <a href="@Url.Action("ProductDetail",new { ID = tt.Id })"><img src="../content/images/@tt.ImageURL" width="220" height="170" /></a><p><a href="#">@tt.ProName</a></p>
+                                    </div>
+                                }
+
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="mlt">
+                                @foreach (var tt in Model.products.Where(u => u.productType.ProTypeTitle == "美的"))
+                                {
+                                    <div class="mlt_n">
+                                        <a href="@Url.Action("ProductDetail",new { ID = tt.Id })"><img src="../content/images/@tt.ImageURL" width="220" height="170" /></a><p><a href="#">@tt.ProName</a></p>
+                                    </div>
+                                }
+
+                            </div>
+
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+            <script src="../content/webjs/jquery.min.js"></script>
+            <script src="../content/webjs/hd.js"></script>
+        </div>
+    </div>
+
+</div>
+
+@*//news*@
+<div class="m3">
+    <div class="m3_l">
+        <div class="m3_lt">新闻</div>
+        <div class="m3_lb">
+            <ul>
+
+                @{int newsnum = 1;}
+                @foreach (var tt in Model.newsInfos)
+                {
+                
+                    if (newsnum < 4)
+                    {
+                        <li>
+                            <img src="../content/images/news.jpg" width="120" height="90" />
+                            <p>
+                                <a href="@Url.Action("NewDetail",new { ID = tt.Id })">
+                                    @tt.NewsTitle
+                                </a>
+                            </p>
+                            <em>@tt.CreateDateTime</em><span >@Html.Raw(@tt.Write)</span>
+                        </li>
+                        newsnum++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                @*<li><img src="images/news.jpg" width="120" height="90" />
+                      <p><a href="#">2016年空调厂商的增长点，到底在哪里？
+                    </a></p>
+                      <em>May 28, 2018 </em><span>2015年的空调市场，是在战战兢兢中走过。如果仅从销量上来看，其实并没有下滑多少。...</span></li>*@
+
+            </ul>
+        </div>
+    </div>
+    <div class="m3_r">
+        <div class="m3_rt">案例</div>
+        <div class="m3_rb">
+            <ul class="clearfix">
+                <li>
+                    <div class="photo"><img src="../content/images/a1.jpg" width="230" height="145" /></div>
+              
+
+                </li>
+                <li>
+                    <div class="photo"><img src="../content/images/a2.jpg" width="230" height="145" /></div>
+        
+
+                </li>
+                <li>
+                    <div class="photo"><img src="../content/images/a3.jpg" width="230" height="145" /></div>
+          
+
+                </li>
+                <li>
+                    <div class="photo"><img src="../content/images/a4.jpg" width="230" height="145" /></div>
+              
+
+                </li>
+            </ul>
+        </div>
+
+        <script src="js/sbhg.js"></script>
+
+
+    </div>
+</div>
+@*//endnews*@

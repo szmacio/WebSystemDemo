@@ -29,7 +29,7 @@ namespace JuCheap.Data.Config
             Property(item => item.PageName).HasColumnType("varchar").IsRequired().HasMaxLength(20);
             Property(item => item.Author).HasColumnType("varchar").IsOptional().HasMaxLength(20);
             Property(item => item.Title).HasColumnType("varchar").IsOptional().HasMaxLength(20);
-            Property(item => item.Content).HasColumnType("varchar").IsOptional().HasMaxLength(2000);
+            Property(item => item.Content).HasColumnType("varchar").IsOptional();
         }
     }
 }

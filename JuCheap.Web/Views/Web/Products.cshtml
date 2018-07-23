@@ -1,0 +1,123 @@
+﻿@model JuCheap.Models.IndexDto
+@using JuCheap.Infrastructure.Utilities
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "产品";
+    Layout = "~/Views/Shared/_WebLayout.cshtml"; ;
+}
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<style type="text/css">
+    #on {
+        color: #FFF;
+        background-color: #337AB7;
+        border-color: #337AB7;
+    }
+
+    .pagination a {
+        margin-right: 3px;
+        padding: 5px 10px;
+        font-size: 12px;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        cursor: pointer;
+        display: inline-block;
+        border-radius: 3px;
+    }
+
+    a {
+        color: #337ab7;
+        text-decoration: none;
+    }
+
+    a {
+        background-color: transparent;
+    }
+
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $(".pagination .active").live("click", function () {
+            $("#page").val($(this).attr("page"));
+            $("#form_Submit").submit();
+        });
+    });
+</script>
+<div class="nbanner"></div>
+<div class="p1">
+    <div class="p_l">
+        <div class="pnav">
+            <div class="main-navigation">
+                <ul>
+             
+                    @foreach (var tt in Model.productTypes)
+                    {
+                        <li>
+                            <a href="@Url.Action("Products", new { ID = tt.Id })">@tt.ProTypeTitle</a>
+                        </li>
+                    }
+                
+              
+                </ul>
+
+            </div>
+            @foreach (var tt in Model.Pagedproducts)
+            {
+
+
+                <div class="p_lb">
+
+                    <img src="../../content/images/@tt.ImageURL" width="230" height="180" />
+                    <p>@tt.ProName</p>
+                    <span>@Html.Raw(@tt.ProMonery)</span>
+                    <em><a href="@Url.Action("ProductDetail", new { ID = tt.Id })">详细</a></em>
+                </div>
+
+            }
+
+
+
+            @*@Html.PagedListPager(Model.Pagedproducts, page => Url.Action("PageListFenye", new { page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "首页", LinkToPreviousPageFormat = "上一页", LinkToNextPageFormat = "下一页", LinkToLastPageFormat = "尾页", MaximumPageNumbersToDisplay = 5 })*@
+            @*<a href="#" class="color4f">Previous</a><u class="color03">1</u> <a href="#" class="color4f">2</a><a href="#" class="color4f">Next</a>*@
+
+        </div>
+
+        <div style="text-align:center">
+            每页 @Model.Pagedproducts.PageSize 条记录，共 @Model.Pagedproducts.PageCount 页，当前第 @Model.Pagedproducts.PageNumber 页
+            @Html.PagedListPager(Model.Pagedproducts, page => Url.Action("Products", new { page }))
+        </div>
+
+    </div>
+    <div class="p1_r">
+        <div class="p1_rt">Latest News</div>
+        <div class="p1_rb">
+            <ul>
+
+                @{int newsnum = 1;}
+                @foreach (var tt in Model.newsInfos)
+                {
+
+                    if (newsnum < 7)
+                    {
+
+
+                        <li><img src="../../content/images/news.jpg" /><p><a href=@Url.Action("NewDetail",new { ID = tt.Id })>@tt.NewsTitle</a></p></li>
+                        newsnum++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+
+
+            </ul>
+        </div>
+
+    </div>
+</div>

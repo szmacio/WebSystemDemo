@@ -1,0 +1,55 @@
+﻿@model JuCheap.Models.IndexDto
+@{
+    ViewBag.Title = "新闻";
+    Layout = "~/Views/Shared/_WebLayout.cshtml"; ;
+}
+<div class="nbanner"></div>
+<div class="n1">
+    <div class="n1_l">
+        <ul>
+
+
+            @foreach (var tt in Model.newsInfos.Where(t=>t.newsType.NewsTypeTitle=="资料下载"))
+            {
+                <li>
+                    <img src="../content/images/tnpic.jpg" width="200" height="150" /><p>
+                        <a href="@Url.Action("NewDetail",new { ID = tt.Id })">@tt.NewsTitle</a>
+                    </p><em>@tt.CreateDateTime </em><span>@Html.Raw(@tt.Write);</span><b><a href="#">View More ></a></b>
+                </li>
+
+            }
+            @*<li><img src="../content/images/tnpic.jpg" width="200" height="150" /><p><a href="#">The introductin of our new Horizontal tank</a> </p><em>Jun 28, 2015 </em><span>Horizontal tank is an elongate vessel which is used in storing base oil,vegetable oil, Horizontal tank is an elongate vessel which is used in storing base oil,vegetable oil...</span><b><a href="#">View More ></a></b></li>*@
+
+        </ul>
+
+        <div class="page">
+            <a href="#" class="color4f">Previous</a><u class="color03">1</u> <a href="#" class="color4f">2</a><a href="#" class="color4f">Next</a>
+        </div>
+
+    </div>
+    <div class="n1_r">
+        <div class="n1_rt">Hot Products</div>
+        <div class="n1_rb">
+            <ul>
+                @{int newsnum = 1;}
+                @foreach (var tt in Model.products)
+                {
+                    if (newsnum < 6)
+                    {
+                        <li>
+                            <a href="@Url.Action("ProductDetail",new { ID = tt.Id })"><img src="../content/images/@tt.ImageURL" width="200" height="155" /></a>
+                            <p>@tt.ProName</p>
+                        </li>
+
+                        newsnum++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -16,6 +16,7 @@ namespace JuCheap.Data.Config
             HasKey(item => item.Id);
             Property(item => item.Id).HasColumnType("varchar").HasMaxLength(20);
             HasOptional(x => x.productType).WithMany(x => x.Products).HasForeignKey(x => x.ProTypeID);
+    
 
         }
     }

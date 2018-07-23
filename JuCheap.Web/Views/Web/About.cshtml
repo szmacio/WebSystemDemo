@@ -1,0 +1,12 @@
+﻿@model JuCheap.Models.SinglePageDto
+@{
+    ViewBag.Title = "公司简介";
+    Layout = "~/Views/Shared/_WebLayout.cshtml"; ;
+}
+<div class="nbanner"></div>
+<div class="a1">
+    <div class="a1_f">
+        @Html.Raw(@Model.Content)
+        <img src="../content/images/ggjj.jpg" />
+    </div>
+</div>

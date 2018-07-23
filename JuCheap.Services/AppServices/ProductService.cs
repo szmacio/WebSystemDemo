@@ -144,6 +144,7 @@ namespace JuCheap.Services.AppServices
             {
                 var db = scope.DbContexts.Get<JuCheapContext>();
                 var list = await db.ProductTypes.ToListAsync();
+
                 var result = _mapper.Map<List<ProductTypeEntity>, List<ProductTypeDto>>(list);
                 return result;
             }
@@ -155,6 +156,17 @@ namespace JuCheap.Services.AppServices
             {
                 var db = scope.DbContexts.Get<JuCheapContext>();
                 var list = await db.Products.ToListAsync();
+                var result = _mapper.Map<List<ProductEntity>, List<ProductDto>>(list);
+                return result;
+            }
+        }
+        async Task<List<ProductDto>> IProductService.GetProductsByType(string id)
+        {
+            using (var scope = _dbContextScopeFactory.Create())
+            {
+                var db = scope.DbContexts.Get<JuCheapContext>();
+                var list = await db.Products.ToListAsync();
+                list= list.Where(p => p.ProTypeID== id).ToList<ProductEntity>();
                 var result = _mapper.Map<List<ProductEntity>, List<ProductDto>>(list);
                 return result;
             }

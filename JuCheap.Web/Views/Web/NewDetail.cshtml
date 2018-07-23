@@ -1,0 +1,26 @@
+﻿@model JuCheap.Models.NewsInfoDto
+@{
+    ViewBag.Title = "新闻详细页";
+    Layout = "~/Views/Shared/_WebLayout.cshtml"; ;
+}
+<div class="nbanner"></div>
+
+<div class="n1">
+    <div class="n1_s">
+
+        <h1>@Model.NewsTitle</h1>
+ 
+        <div class="snr">
+            @Html.Raw(@Model.NewsContent)
+        </div>
+
+    </div>
+    <div class="n1_r">
+        <div class="n1_rt">联系</div>
+        <div class="n1_rb">
+            <img src="../../content/images/youbian.jpg" />
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,157 @@
+﻿@using StackExchange.Profiling
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>深圳市龙鑫机电设备工程有限公司</title>
+
+    <link href="~/Content/css/inde1x.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/index.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/nav.js"></script>
+    @*@Styles.Render("~/content/css/web")*@
+</head>
+
+<body>
+    <div class="t">
+        <div class="t_n">
+            <div class="t_nl">
+                <p class="tel">+86-13602693964</p>
+                <p class="mail">szlsin@163.com</p>
+            </div>
+            <div class="r_nr">网址：www.szlsin.com </div>
+        </div>
+    </div>
+    <div class="top">
+        <div class="logo"><img src="../../content/images/logo.jpg" /></div>
+        <div class="search">
+            <!--<form  method="post" action="/search.asp">
+                  <input type="textk" class="textk" name="textfield3" id="textfield3" /><input type="submit" value="" title="注册" class="but" />
+            </form>-->
+            <form name="productform" class="sysousuo" action="#" method="post">
+                <input name="title" class="fl sysuoming" id="title" onfocus="aa()" onblur="bb()" type="text" value="Search here...">
+                <script> function ddd(obj, sType) { var oDiv = document.getElementById(obj); if (sType == 'show') { oDiv.style.display = 'block'; } if (sType == 'hide') { oDiv.style.display = 'none'; } } </script>
+                <a class="fl" style="width: 14px; height: 38px; display: block; position: relative;" onmouseover="ddd('aa', 'show');" onmouseout="ddd('aa', 'hide');" href="#"></a>
+                <div id="aa" style="background:#00990d; width: 250px; line-height: 30px; margin-top: 37px; display: none; position: absolute; z-index: 100000;" onmouseover="ddd('aa', 'show');" onmouseout="ddd('aa', 'hide');">
+                   
+                </div>
+                <input name="dosubmit" class="fl sytijiao" type="submit" value="">
+                <input name="catid" type="hidden" value="87">
+                <div class="clear"></div>
+            </form>
+
+
+
+
+
+
+        </div>
+    </div>
+    <div class="nav">
+        <div class="menu1">
+            <ul id="navigation1">
+                <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)">
+                    <a href="@Url.Action("Index")" class="nav_h1">首页</a>
+
+                </li>
+
+                <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)">
+                    <a href="@Url.Action("About")" class="nav_h1">公司简介</a>
+
+                </li>
+
+                <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)">
+                    <a href="@Url.Action("News")"  class="nav_h1">新闻动态</a>
+                   
+                </li>
+
+                <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)" class="nav_w">
+                    <a href="@Url.Action("Products")"  class="nav_h1">产品介绍 </a>
+             
+                </li>
+
+                <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)">
+                    <a href="@Url.Action("Down")"  class="nav_h1">资料下载</a>
+              
+                </li>
+
+
+                <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)">
+                    <a href="@Url.Action("Order")"  class="nav_h1">在线订购</a>
+                 
+                </li>
+
+                <li onmouseover="displaySubMenu(this)" onmouseout="hideSubMenu(this)">
+                    <a href="@Url.Action("Contactus")" class="nav_h1">联系我们</a>
+            
+                </li>
+
+
+            </ul>
+
+        </div>
+    </div>
+
+    @RenderBody()
+
+
+
+    <div class="fnav">
+        <div class="fnav_n">
+            <div class="fnav_nll">
+                <p>QUICK LINKS</p>
+                <a href="#">Storage Tank</a>
+                <a href="#">Heat Exchanger</a>
+                <a href="#">Tower</a>
+                <a href="#">Spherical Tank</a>
+                <a href="#">Skidded Equipment</a>
+                <a href="#">Accessories</a>
+            </div>
+            <div class="fnav_nll">
+                <p>NAVIGATION</p>
+                <a href="#">About us</a>
+                <a href="#">Products</a>
+                <a href="#">Quality Control</a>
+                <a href="#">Project Cases</a>
+                <a href="#">Customer</a>
+                <a href="#">News</a>
+            </div>
+            <div class="fnav_nll">
+                <p>CONTACT US</p>
+                <span class="ftel">+86-18926563791</span>
+                <span class="ffax">+86-18926563791</span>
+                <span class="fmail">szmacio@163.com</span>
+                <div class="fx"><img src="images/f1.jpg" /><img src="images/f2.jpg" /><img src="images/f3.jpg" /><img src="images/f4.jpg" /></div>
+            </div>
+            <div class="fly">
+                <p>GET IN TOUCH</p>
+                <div class="fly_b">
+                    <form method="post" action="#">
+                        <div class="fly_bl">
+                            <input type="textk" class="t1" name="textfield" id="textfield" />
+                            <input type="textk" class="t1" name="textfield" id="textfield" />
+                            <input type="textk" class="t1" name="textfield" id="textfield" />
+                        </div>
+                        <div class="fly_br">
+                            <textarea name="" class="t2"></textarea>
+                            <input type="textk" class="t3" name="textfield" id="textfield" /><img src="images/yzm.jpg" width="67" height="25" />
+                        </div>
+                        <div class="fly_bb"><input type="submit" value="" class="fbut" /></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="f">
+        <div class="foot">
+            <div class="fl">Copyright &copy; 2018.Company name All rights reserved.<a target="_blank" href="http://www.matao.com.cn/">马涛</a></div>
+            <div class="fr">Powered by Tom</div>
+        </div>
+    </div>
+</body>
+</html>

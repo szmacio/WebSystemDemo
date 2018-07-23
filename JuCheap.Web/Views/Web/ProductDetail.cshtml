@@ -1,0 +1,47 @@
+﻿@model JuCheap.Models.ProductDto
+@{
+    ViewBag.Title = "产品详细页";
+    Layout = "~/Views/Shared/_WebLayout.cshtml"; ;
+}
+<div class="nbanner"></div>
+
+<div class="p1">
+    <div class="p1_l">
+        <div class="p1_lt">@Model.ProName</div>
+        <div class="pl_lm">
+
+            <div class="box1 fl">
+                <a href="" rel="zoom1" rev="images/spic3.jpg" class="huaguo"> <img src="../../content/images/@Model.ImageURL" /></a>
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+        <div class="p1_lf">
+            <div class="p1_lft">产品描述</div>
+            <div class="p1_lfb">
+                @Html.Raw(@Model.Procontent)
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+    <div class="p1_r">
+        <div class="p1_rt">联系</div>
+        <div class="n1_rb">
+            <img src="../../content/images/youbian.jpg" />
+        </div>
+
+    </div>
+</div>
